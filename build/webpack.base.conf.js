@@ -22,6 +22,7 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
+  // resolve 区块
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
