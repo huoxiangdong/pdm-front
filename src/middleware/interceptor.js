@@ -1,6 +1,5 @@
 import axios from 'axios'
 import router from '@/router'
-// import store from '@/store'
 
 axios.default.timeout = 5000
 axios.defaults.headers.post['Content-Type'] = 'application/json'
@@ -29,8 +28,7 @@ axios.interceptors.request.use(
 
 // axios拦截响应
 axios.interceptors.response.use(response => {
-  // 后端的checkLogin返回的json数据作为跳转依据
-  if (!response.data.token) {
+  if (!response.data.token) { // 后端的checkLogin返回的json数据作为跳转依据
     router.replace({
       path: 'login',
       query: {

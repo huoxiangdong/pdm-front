@@ -1,40 +1,36 @@
 <template>
   <div>
-      <!-- logo -->
-    <div class="logo">
-      <img src="../assets/logo.png" alt="">
-    </div>
-<el-card class="box-card">
-   
-        <el-form  :model="formRegister" :rules="rules" ref="formRegister">
-          <el-form-item label="请输入账号" prop="name">
-            <el-input v-model="formRegister.name"></el-input>
-          </el-form-item>
-          <el-form-item label="请输入密码" prop="password">
-            <el-input v-model="formRegister.password"></el-input>
-          </el-form-item>
-          <el-form-item label="请确认密码" prop="checkPassword">
-            <el-input v-model="formRegister.checkPassword"></el-input>
-          </el-form-item>
-          <el-form-item></el-form-item>
-          <el-form-item>
-            <el-button type="success" size="medium" @click="addUser">立即注册</el-button>
-            <!-- <el-button>取消</el-button> -->
-          </el-form-item>
-        </el-form>
-     
-  </el-card>
-
-
+    <el-card class="box-card">
+      <el-form :model="formRegister" :rules="rules" ref="formRegister">
+        <el-form-item label="请输入账号" prop="name">
+          <el-input v-model="formRegister.name" size="medium" ></el-input>
+        </el-form-item>
+        <el-form-item label="请输入密码" prop="password" size="medium" >
+          <el-input type="password" v-model="formRegister.password"></el-input>
+        </el-form-item>
+        <el-form-item label="请确认密码" prop="checkPassword">
+          <el-input type="password" v-model="formRegister.checkPassword"></el-input>
+        </el-form-item>
+        <el-form-item></el-form-item>
+        <el-form-item>
+          <el-button type="success" size="medium" @click="addUser">立即注册</el-button>
+           <!--  <el-button>取消</el-button> -->
+          </el-form-item> 
+      </el-form>
+    </el-card>
   </div>
 </template>
 
+
+
 <script type="text/javascript">
+  import Logo from '../components/Logo.vue'
   export default {
     data () {
       let checkUserName = (rule, value, cb) => {
-        if (!value) {
-          return cb(new Error('账户不能为空!'))
+        // 禁止账号为空格 value.match(/^\s+$/gi)
+        if (!value || value.match(/^\s+$/gi)) {
+          return cb(new Error("账号不能为空"))
         } else {
           cb() // 将判断传递给后面
         }
@@ -107,41 +103,37 @@
           }
         })
       }
-    }
+    },
+     components: {
+		Logo
+	}
   }
 
 </script>
 
-<style>
-/* logo */
-.logo{
-  margin:50px auto;
-}
+<style scoped>
 
 .el-card {
   margin: 0 auto;
   /* margin-top: 3%; */
   width: 300px;
 }
+
 /* 登录字体 */
+
 .el-form-item__label {
   font-size: 16px;
   font-weight: bold;
   color: #000
 }
-/* 登录按钮 */
-.el-button--medium, .el-button--medium.is-round{
-  width:100%
-}
-/* 输入框 */
-.el-input .el-input__inner{
-  height: 36px;
-}
-.el-form-item__content{
- 
-  line-height: 36px;
-}
 
+/* 登录按钮 */
+
+.el-button--medium,
+.el-button--medium.is-round {
+  width: 100%
+}
 
 
 </style>
+

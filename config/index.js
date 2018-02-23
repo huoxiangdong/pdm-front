@@ -7,12 +7,14 @@ const path = require('path')
 module.exports = {
   dev: {
 
-    // Paths
+    // Paths 
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
+    // 代理
     proxyTable: {
       '/api': {
         target: 'http://localhost:3000',
+        //target:'http://118.89.244.246:3000',
         changeOrigin: true
       }
     },

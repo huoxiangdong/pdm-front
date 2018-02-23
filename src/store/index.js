@@ -6,8 +6,8 @@ import actions from './action'
 Vue.use(Vuex)
 
 const state = {
-    token : null,
-    username: ''
+  token: null,
+  username: ''
 }
 
 export default new Vuex.Store({

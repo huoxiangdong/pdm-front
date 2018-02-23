@@ -3,9 +3,8 @@
 import axios from 'axios'
 
 /* 创建ajax类 */
-class Ajax {
-
-  constructor (options) {
+class ajax {
+  constructor(options) {
     this.$http = axios
     this.baseUrl = options && options.baseUrl ? options.baseUrl : ''
     this.authUrl = options && options.authUrl ? options.authUrl : ''
@@ -15,11 +14,9 @@ class Ajax {
     this.putWayMap = {}
     this.patchMap = {}
     this.deleteMap = {}
-    // 正在登陆
-    this.logining = false
+    this.logining = false // 正在登陆
     this.next = ''
-    // 输出提示
-    this.showTips = (tips) => {
+    this.showTips = (tips) => { // 输出提示
       if (window.console) {
         console.log(tips)
       }
@@ -30,8 +27,6 @@ class Ajax {
     } else {
       this.success = res => {}
     }
-
-
 
     // ajax 全局响应错误处理
     axios.interceptors.response.use(
@@ -97,10 +92,75 @@ class Ajax {
     return path
   }
 
+  //  增
+  //   参数: path-->路径 
+  create(path, config1 = {
+    cache: false
+  }) {
+    if (!this.createMap[path]) { // cache path closure
+      let url = ''
+      this.createMap[path] = (data, expand, config2 = {}) => {
+        // 合并config
+        let config = Object.assign({}, config1, config2)
+        // 关闭缓存
+        if (!config.cache) {
+          let headers = config.headers = config.headers || {}
+          headers['Cache-Control'] = 'no-cahce'
+          headers['If-Modified-Since'] = '0'
+        }
+        if (expand) {
+          url = path + '/' + expand
+        } else {
+          url = path
+        }
+        let baseUrl = config.baseUrl || this.baseUrl
+
+        return this.$http.post(baseUrl + url, data, config).then((res) => {
+          console.log("这里响应的是" + JSON.stringify(res.data))
+          return res.data
+        }, (res) => {
+          return res
+        })
+      }
+    }
+    return this.createMap[path]
+  }
+  // 删
+  delete(path, config1 = {
+    cache: false
+  }) {
+    if (!this.deleteMap[path]) {
+      let url = ''
+      this.deleteMap[path] = (data, expand, config2 = {}) => {
+        // 合并config
+        let config = Object.assign({}, config1, config2)
+        // 关闭缓存
+        if (!config.cache) {
+          let headers = config.headers = config.headers || {}
+          headers['Cache-Control'] = 'no-cahce'
+          headers['If-Modified-Since'] = '0'
+        }
+        if (expand) {
+          url = path + '/' + expand
+        } else {
+          url = path
+        }
+        let baseUrl = config.baseUrl || this.baseUrl
+        return this.$http.delete(baseUrl + url, data, config).then((res) => {
+          return res.data
+        }, (res) => {
+          return res
+        })
+      }
+    }
+    return this.deleteMap[path]
+  }
+
+  // 查
   query(path, config1 = {
     cache: false
   }) {
-   
+
     if (!this.queryMap[path]) { // cache path closure
       let url = ''
       this.queryMap[path] = (id, expand, config2 = {}) => {
@@ -122,9 +182,9 @@ class Ajax {
           newPath = this.parse(url, id)
         }
         let baseUrl = config.baseUrl || this.baseUrl
-        
+
         return this.$http.get(baseUrl + newPath, config).then((res) => {
-         
+
           return res.data
         }, (res) => {
           return res
@@ -135,39 +195,7 @@ class Ajax {
   }
 
 
-  //  增加
-  //   参数: path-->路径 
 
-  create(path, config1 = {cache: false}) {
-    
-    if (!this.createMap[path]) { // cache path closure
-      let url = ''
-      this.createMap[path] = (data, expand, config2 = {}) => {
-        // 合并config
-        let config = Object.assign({}, config1, config2)
-        // 关闭缓存
-        if (!config.cache) {
-          let headers = config.headers = config.headers || {}
-          headers['Cache-Control'] = 'no-cahce'
-          headers['If-Modified-Since'] = '0'
-        }
-        if (expand) {
-          url = path + '/' + expand
-        } else {
-          url = path
-        }
-        let baseUrl = config.baseUrl || this.baseUrl
-        
-        return this.$http.post(baseUrl + url, data, config).then((res) => {
-         //console.log(res)
-        return res.data
-        }, (res) => {
-          return res
-        })
-      }
-    }
-    return this.createMap[path]
-  }
 
   // put 方法~
   putWay(path, config1 = {
@@ -231,37 +259,8 @@ class Ajax {
     return this.patchMap[path]
   }
 
-  // delete方法
-  delete(path, config1 = {
-    cache: false
-  }) {
-    if (!this.deleteMap[path]) {
-      let url = ''
-      this.deleteMap[path] = (data, expand, config2 = {}) => {
-        // 合并config
-        let config = Object.assign({}, config1, config2)
-        // 关闭缓存
-        if (!config.cache) {
-          let headers = config.headers = config.headers || {}
-          headers['Cache-Control'] = 'no-cahce'
-          headers['If-Modified-Since'] = '0'
-        }
-        if (expand) {
-          url = path + '/' + expand
-        } else {
-          url = path
-        }
-        let baseUrl = config.baseUrl || this.baseUrl
-        return this.$http.delete(baseUrl + url, data, config).then((res) => {
-          return res.data
-        }, (res) => {
-          return res
-        })
-      }
-    }
-    return this.deleteMap[path]
-  }
 }
 
-export default new Ajax()
+export default new ajax()
+
 

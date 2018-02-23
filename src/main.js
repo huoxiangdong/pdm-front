@@ -5,16 +5,24 @@ import App from './App'
 import router from './router'
 import store from './store/index'
 
+import './views/layout'
+
 // element ui
 import Element from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+//import 'element-ui/lib/theme-chalk/index.css'
+import './assets/style/element-variables.scss'
+
+// icon
+import './assets/icon/iconfont.css'
+
 
 // 拦截
-import axios from './rest/interceptor.js'
+import axios from './middleware/interceptor'
 Vue.prototype.$http = axios
 
 // api 
-import rest from './rest'
+import rest from './middleware/rest'
+
 Vue.config.productionTip = false
 
 
@@ -26,6 +34,7 @@ new Vue({
   router,
   store,
   rest,
-  components: { App },
-  template: '<App/>'
+  render: h => h(App)
+  //components: { App },
+  //template: '<App/>'
 })
