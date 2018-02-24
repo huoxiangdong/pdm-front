@@ -1,9 +1,12 @@
 import Vue from 'vue'
-import PdmFooter from './Pdm-Footer.vue'
+//layout
+import NavMenu from './NavMenu.vue'
+import SideBar from './SideBar.vue'
+import WorkSpace from './WorkSpace.vue'
+import AppFooter from './AppFooter.vue'
 //ivews
 import clickoutside from 'iview/src/directives/clickoutside'
 import 'iview/dist/styles/iview.css'
-
 import {
     Alert,
     AutoComplete,
@@ -113,5 +116,8 @@ Vue.prototype.$Notice = Notice
 Vue.prototype.$Spin = Spin
 
 // 注册全局组件
-Vue.component('PdmFooter', PdmFooter)
+Vue.component('NavMenu', NavMenu)
+Vue.component('SideBar', SideBar)
+Vue.component('WorkSpace', WorkSpace)
+Vue.component('AppFooter', AppFooter)
 Vue.directive('clickoutside',clickoutside)

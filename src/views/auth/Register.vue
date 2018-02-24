@@ -1,24 +1,19 @@
-<template>
-  <div>
-    <el-card class="box-card">
-      <el-form :model="formRegister" :rules="rules" ref="formRegister">
-        <el-form-item label="请输入账号" prop="name">
-          <el-input v-model="formRegister.name" size="medium" ></el-input>
-        </el-form-item>
-        <el-form-item label="请输入密码" prop="password" size="medium" >
-          <el-input type="password" v-model="formRegister.password"></el-input>
-        </el-form-item>
-        <el-form-item label="请确认密码" prop="checkPassword">
-          <el-input type="password" v-model="formRegister.checkPassword"></el-input>
-        </el-form-item>
-        <el-form-item></el-form-item>
-        <el-form-item>
-          <el-button type="success" size="medium" @click="addUser">立即注册</el-button>
-           <!--  <el-button>取消</el-button> -->
-          </el-form-item> 
-      </el-form>
-    </el-card>
-  </div>
+<template lang="pug">
+  div
+    el-card(class="box-card")
+      el-form(:model="formRegister" :rules="rules" ref="formRegister")
+        el-form-item(label="请输入账号" prop="name")
+          el-input(v-model="formRegister.name" size="medium")
+        
+        el-form-item(label="请输入密码" prop="password" size="medium")
+          el-input(type="password" v-model="formRegister.password")
+      
+        el-form-item(label="请确认密码" prop="checkPassword")
+          el-input(type="password" v-model="formRegister.checkPassword")
+       
+        el-form-item
+        el-form-item
+          el-button(type="success" size="medium" @click="addUser") 立即注册
 </template>
 
 
@@ -26,7 +21,7 @@
 <script type="text/javascript">
   import Logo from '../components/Logo.vue'
   export default {
-    data () {
+    data() {
       let checkUserName = (rule, value, cb) => {
         // 禁止账号为空格 value.match(/^\s+$/gi)
         if (!value || value.match(/^\s+$/gi)) {
@@ -75,8 +70,8 @@
       }
     },
     methods: {
-      addUser () {
-          //console.log(this.$rest)
+      addUser() {
+        //console.log(this.$rest)
         let user = this.formRegister
         let formData = {
           name: user.name,
@@ -104,36 +99,28 @@
         })
       }
     },
-     components: {
-		Logo
-	}
+    components: {
+      Logo
+    }
   }
-
 </script>
 
-<style scoped>
-
-.el-card {
-  margin: 0 auto;
+<style lang="stylus">
+.el-card 
+  margin: 0 auto
   /* margin-top: 3%; */
-  width: 300px;
-}
+  width: 300px
 
 /* 登录字体 */
-
-.el-form-item__label {
-  font-size: 16px;
-  font-weight: bold;
+.el-form-item__label 
+  font-size: 16px
+  font-weight: bold
   color: #000
-}
 
 /* 登录按钮 */
-
 .el-button--medium,
-.el-button--medium.is-round {
+.el-button--medium.is-round 
   width: 100%
-}
-
 
 </style>
 

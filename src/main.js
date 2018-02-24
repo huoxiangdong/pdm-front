@@ -1,10 +1,8 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store/index'
-
+// 子组件 iviews
 import './views/layout'
 
 // element ui
@@ -15,7 +13,6 @@ import './assets/style/element-variables.scss'
 // icon
 import './assets/icon/iconfont.css'
 
-
 // 拦截
 import axios from './middleware/interceptor'
 Vue.prototype.$http = axios
@@ -24,8 +21,6 @@ Vue.prototype.$http = axios
 import rest from './middleware/rest'
 
 Vue.config.productionTip = false
-
-
 
 Vue.use(Element)
 /* eslint-disable no-new */

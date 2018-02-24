@@ -1,2 +1,2 @@
-export const LOGIN = 'LOGIN'
-export const LOGINOUT = 'LOGINOUT'
+export const LOGIN = 'LOGIN'  // 登录
+export const LOGINOUT = 'LOGINOUT' // 登出

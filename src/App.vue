@@ -1,7 +1,7 @@
-<template>
-  <div id="app" class="flex flex-column over-hide">
-    <router-view></router-view>
-  </div>
+<template lang="pug">
+  div(id="app" class="flex flex-column over-hide") 
+    // 子路由插入
+    router-view  
 </template>
 
 <script>
@@ -11,6 +11,6 @@ export default {
 </script>
 
 <style lang="stylus">
-@import './assets/styles'
-@import './assets/base.styl'
+//@import './assets/styles'
+@import './assets/stylus/base.styl'
 </style>

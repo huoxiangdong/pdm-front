@@ -4,14 +4,13 @@ import Router from 'vue-router'
 import Home from '@/views/Home'
 //import Register from '@/views/Register'
 //import Login from '@/views/Login'
-
 // test
 //import NavMenu from '@/views/components/NavMenu'
 
 // 注册路由
 Vue.use(Router)
 
-// 配置路由；发
+// 配置路由；
 //const router = new Router({
 //  routes: [{
 //      path: '/',
@@ -87,7 +86,7 @@ const routes = [
 // 实例路由
 const router = new Router({
   mode: 'history',
-  routes
+  routes // 传入路由配置
 }) 
 
 // 导出路由
