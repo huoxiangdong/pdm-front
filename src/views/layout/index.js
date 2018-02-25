@@ -1,3 +1,4 @@
+// 全局组件注册
 import Vue from 'vue'
 //layout
 import NavMenu from './NavMenu.vue'

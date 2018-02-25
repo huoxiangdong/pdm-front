@@ -1,7 +1,6 @@
 <template lang="pug">
   div(id="app" class="flex flex-column over-hide") 
-    // 子路由插入
-    router-view  
+    router-view(子路由插入)
 </template>
 
 <script>

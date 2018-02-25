@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.pdm-footer
+.app-footer
   position relative
   bottom 0
   left 0

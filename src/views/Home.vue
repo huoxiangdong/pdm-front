@@ -1,22 +1,21 @@
 <template lang="pug">
+  // 布局:
+                                          -----  el-header
+                                          -- --  el-aside  el-main
+                                          -----  el-footer
   div
     el-container
       el-header
-        // 导航菜单
-        nav-menu 
+        nav-menu( @click.native="isCollapse=!isCollapse" )
+      // 中
       el-container
-        // 1
         el-aside(style="width:200px;margin-top: 20px;margin-left:20px") 
-          // 侧边菜单
-          side-bar
-        // 2
-        el-container
-          el-main
-            // 工作区
-            work-space
+          side-bar(侧边菜单)
+        el-main
+          work-space(工作区)
+      // 底
       el-footer
-        // footer
-        pdm-footer
+        app-footer
 </template>
 
 <script>
@@ -28,7 +27,6 @@ export default {
         user: "",
         region: ""
       },
-      isCollapse: false,
       user: { name: "" }
     };
   },

@@ -27,7 +27,7 @@ export default {
 
   .el-carousel__item:nth-child(2n) 
     background-color: #ff5000
-
+    
   .el-carousel__item:nth-child(2n+1) 
     background-color:#fff
 

@@ -1,7 +1,7 @@
 <template lang="pug">
   el-menu(:default-active="activeIndex" class="el-menu-demo" mode="horizontal")
-    // 1
-    el-menu-item(index="1" @click.native="isCollapse=!isCollapse")
+    // 1 @click.native="isCollapse=!isCollapse" 点击事件，控制sidebar
+    el-menu-item(index="1" @click.native="collapse()")
       template(slot="title") 处理中心
     // 2
     el-submenu(index="2")
@@ -34,12 +34,18 @@
 
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
       activeIndex: "1",
       user: { name: "" }
     };
+  },
+  methods: {
+    ...mapActions([
+      'collapse'
+    ])
   }
 };
 </script>
@@ -49,3 +55,5 @@ export default {
   margin-right: 110px;
 }
 </style>
+
+

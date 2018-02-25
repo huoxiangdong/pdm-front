@@ -1,5 +1,7 @@
 <template lang="pug">
-  el-menu(default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse")
+  // collapse="!isCollapse" 控制展开收起
+  el-menu(default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" 
+  :collapse="collapse") 
     el-submenu(index="1")
       template(slot="title")
         i(class="el-icon-location")
@@ -22,5 +24,18 @@
     
     el-menu-item(index="3")
       i(class="el-icon-setting")
-      span(slot="title") 导航三
+      span(slot="title") {{collapse}}
 </template>
+
+<script>
+export default {
+  data() {
+     return { // 静态数据
+       //isCollapse: this.$store.state.isCollapse
+     }
+  },
+  computed: { // 动态的数据要放在computed内
+    collapse(){ return this.$store.state.isCollapse }
+  }
+}
+</script>

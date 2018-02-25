@@ -1,3 +1,4 @@
+// 改变的数据
 import * as types from './mutation-types'
 
 export const mutations = {
@@ -14,6 +15,10 @@ export const mutations = {
     state.token = ''
     localStorage.removeItem('username')
     state.username = ''
+  },
+  // SideBar折叠
+  [types.COLLAPSE](state) {
+    state.isCollapse = !state.isCollapse
   }
 }
 
