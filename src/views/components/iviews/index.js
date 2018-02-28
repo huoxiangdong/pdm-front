@@ -1,13 +1,7 @@
-// 全局组件注册
 import Vue from 'vue'
-//layout
-import NavMenu from './NavMenu.vue'
-import SideBar from './SideBar.vue'
-import WorkSpace from './WorkSpace.vue'
-import AppFooter from './AppFooter.vue'
-//ivews
-import clickoutside from 'iview/src/directives/clickoutside'
-import 'iview/dist/styles/iview.css'
+//ivews 按需引入
+import clickoutside from 'iview/src/directives/clickoutside' // 自定义指令
+import 'iview/dist/styles/iview.css' // 样式
 import {
     Alert,
     AutoComplete,
@@ -111,14 +105,20 @@ const components = {
     Tree,
     Upload
   }
+// Object.keys 遍历对象属性 返回字符串数组
+// forEach 遍历数组  
+Object.keys(components).forEach(key => {
+   // 生产环境
+    if (process.env.NODE !== 'production') {
+      console.log(typeof components) 
+    } 
+    // 注册组件 components[key]返回属性key值
+    Vue.component('i' + key, components[key])
+  })
 
 Vue.prototype.$Message = Message
 Vue.prototype.$Notice = Notice
 Vue.prototype.$Spin = Spin
 
-// 注册全局组件
-Vue.component('NavMenu', NavMenu)
-Vue.component('SideBar', SideBar)
-Vue.component('WorkSpace', WorkSpace)
-Vue.component('AppFooter', AppFooter)
+// 自定义指令
 Vue.directive('clickoutside',clickoutside)

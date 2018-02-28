@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(class="pdm-footer px-2")
+  div(class="app-footer px-2")
    div(class="links text-center")
       a(v-for="(link,index) in links" :key="index" class="text-secondary" :class="{'mr-4': index!==links.length-1}" :href="link.href||link.link") {{link.text}}
    div(class="copyright mt-1 text-secondary text-center") Copyright 2018 &copy; huoxiangdong@aliyun.com
@@ -29,7 +29,6 @@ export default {
   bottom 0
   left 0
   width 100%
-  margin 10px auto 24px
-  
+  margin 20px auto 24px
 </style>
 

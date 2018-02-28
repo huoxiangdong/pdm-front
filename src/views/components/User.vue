@@ -1,37 +1,37 @@
 <template lang="pug">
-  // 布局:
-                                          -----  el-header
-                                          -- --  el-aside  el-main
-                                          -----  el-footer
-  div
-    el-container
-      el-header
-        NavMenu(菜单)
-      // 中
-      el-container
-        el-aside
-          side-bar(侧边菜单)
-        el-main
-          WorkSpace(工作区)
-      // 底
-      el-footer
-        AppFooter
+  el-menu-item(index="5" :style="{float: 'right'}")
+      //  如果用户不存在，跳到登录
+      router-link(v-show="!user.name" to="/auth/login") 登录
+      // 个人中心
+      el-dropdown(@command="loginOut" placement='bottom-start')
+        span(v-show="user.name") {{user.name}}
+          img(src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png")
+          //i(class="el-icon-caret-bottom el-icon--right")
+        // 下拉菜单
+        el-dropdown-menu(slot="dropdown")
+          el-dropdown-item 
+            i(class="iconfont icon-dengluzhanghao") 
+            i  个人中心
+          el-dropdown-item 
+            i(class="iconfont icon-shezhi") 
+            i  设置
+          el-dropdown-item(command)
+            i(class="iconfont icon-tuichu") 
+            i  退出登录
 </template>
 
 <script>
-//import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 export default {
   data() {
     return {
-      formInline: {
-        user: "",
-        region: ""
-      },
-      //user: { name: "" }
-    };
+      user: { name: "" }
+    }
   },
- /*  methods: {
-    ...mapActions(["userLoginOut"]),
+  methods: {
+    ...mapActions([
+      'userLoginOut'
+    ]),
     loginOut() { // 登出
       this.userLoginOut();
       this.user.name = null; // name置null
@@ -40,8 +40,8 @@ export default {
         this.$message.success("登出成功");
       } else { this.$message.success("登出失败"); }
     }
-  }, */
- /*  beforeCreate() {
+  },
+  beforeCreate() {
     // 第二次拦截 当主页刷新时，如果服务端设置的token的时效到了的话，便会提示未登录
     if (this.$rest) {  // this.$rest 只读
       this.$rest.user
@@ -60,11 +60,14 @@ export default {
         })
         .catch(err => { this.$message.error(`${err.message}`, "ERROR!"); }); //console.log(err);
     }
-  } */
+  }
 }
 </script>
 
 <style lang="stylus">
-
+// 用户头像
+.el-dropdown > span > img 
+  width: 20px
+  height: 20px
+  margin-bottom: 5px;
 </style>
-

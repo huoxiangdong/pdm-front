@@ -1,19 +1,23 @@
 <template lang="pug">
-  el-carousel(height="800px" indicator-position="outside" arrow="never" :autoplay="false")
+  el-carousel(
+    height="800px" 
+    indicator-position="outside" 
+    arrow="never" 
+    :autoplay="false")
     el-carousel-item
+      wNavMenu
+      wActiveArea
     el-carousel-item
-      h1 1
+      wNavMenu
+      wDraw
 </template>
 
 <script>
 export default {
   data() {
-    return
-
-
+    return {}
   }
 }
-
 </script>
 
 <style lang="stylus">
@@ -24,9 +28,9 @@ export default {
      opacity: 0.75
      line-height: 300px
      margin: 0
-
+// 卡片背景颜色
   .el-carousel__item:nth-child(2n) 
-    background-color: #ff5000
+    background-color: #fff
     
   .el-carousel__item:nth-child(2n+1) 
     background-color:#fff

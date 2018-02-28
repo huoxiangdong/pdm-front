@@ -2,7 +2,7 @@
   div(class="app-auth flex flex-column flex-ai-center")
     Logo
     router-view
-    pdm-footer(:links="links" class="absolute")
+    app-footer(:links="links")
 </template>
 
 <script>
@@ -26,6 +26,7 @@
         ]
       }
     },
+    components: { Logo },
     // 在实例创建完成后被立即调用
     created() {
       const script = document.createElement('script')
@@ -36,6 +37,7 @@
       document.body.appendChild(script)
       this.script = script
     },
+    // 实例销毁之前调用。在这一步，实例仍然完全可用
     beforeDestroy() {
       const l = document.getElementsByTagName('script')
       const canvasNest = document.getElementById('c_n' + l.length)
@@ -45,9 +47,6 @@
       if (this.script) {
         this.script.remove()
       }
-    },
-    components: {
-      Logo
     }
   }
 

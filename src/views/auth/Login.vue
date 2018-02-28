@@ -12,7 +12,7 @@
         // 站位
         el-form-item  
         el-form-item
-          el-button(type="success" size="medium" @click="login")
+          el-button(type="success" size="medium" @click="login") 登录
         // 站位
         el-form-item  
         // 路由跳转到注册页 
@@ -125,8 +125,7 @@
       Logo
     }
   }
-
-
+  
 </script>
 
 /* 必须设置scoped，负责设置的样式污染全局 */

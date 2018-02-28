@@ -1,7 +1,7 @@
 <template lang="pug">
   // collapse="!isCollapse" 控制展开收起
   el-menu(default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" 
-  :collapse="collapse") 
+  :collapse="collapse" id="sidebar") 
     el-submenu(index="1")
       template(slot="title")
         i(class="el-icon-location")
@@ -36,6 +36,24 @@ export default {
   },
   computed: { // 动态的数据要放在computed内
     collapse(){ return this.$store.state.isCollapse }
-  }
+  },
+  methods: {
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    }
 }
 </script>
+
+<style lang="stylus">
+#sidebar .el-submenu__title
+   // background-color:#000
+// 侧边菜单
+ .el-aside
+   width:200px!important
+   margin-top: 20px
+   margin-left:20px
+</style>
