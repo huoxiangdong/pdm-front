@@ -110,7 +110,7 @@ const components = {
 Object.keys(components).forEach(key => {
    // 生产环境
     if (process.env.NODE !== 'production') {
-      console.log(typeof components) 
+      //console.log(typeof components) 
     } 
     // 注册组件 components[key]返回属性key值
     Vue.component('i' + key, components[key])

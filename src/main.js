@@ -14,6 +14,9 @@ import './assets/style/element-variables.scss'
 
 // icon
 import './assets/icon/iconfont.css'
+// font-awesome
+import 'font-awesome/css/font-awesome.min.css'
+
 
 // 拦截
 import axios from './middleware/interceptor'

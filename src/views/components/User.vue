@@ -69,5 +69,5 @@ export default {
 .el-dropdown > span > img 
   width: 20px
   height: 20px
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 </style>
