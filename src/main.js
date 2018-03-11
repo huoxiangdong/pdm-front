@@ -16,7 +16,9 @@ import './assets/style/element-variables.scss'
 import './assets/icon/iconfont.css'
 // font-awesome
 import 'font-awesome/css/font-awesome.min.css'
-
+// egrid
+import Egrid from 'egrid'
+Vue.use(Egrid)
 
 // 拦截
 import axios from './middleware/interceptor'

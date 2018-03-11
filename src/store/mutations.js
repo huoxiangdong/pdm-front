@@ -19,6 +19,10 @@ export const mutations = {
   // SideBar折叠
   [types.COLLAPSE](state) {
     state.isCollapse = !state.isCollapse
+  },
+  // 打开添加工序
+  [types.OPENADDLAYER](state) {
+    state.isOpenAddLayer = !state.isOpenAddLayer
   }
 }
 

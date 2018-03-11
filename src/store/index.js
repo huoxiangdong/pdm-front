@@ -8,7 +8,9 @@ Vue.use(Vuex)
 const state = {
   token: null,
   username: '',
-  isCollapse: false
+  isCollapse: false,
+  isOpenAddLayer: false
+
 }
 
 export default new Vuex.Store({

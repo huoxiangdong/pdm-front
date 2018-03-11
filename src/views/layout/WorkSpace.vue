@@ -1,21 +1,38 @@
 <template lang="pug">
+div
+  wAddLayer
   el-carousel(
     height="800px" 
     indicator-position="outside" 
     arrow="never" 
     :autoplay="false")
     el-carousel-item
+      wBom
+      
+    el-carousel-item
+      egridUse
+    el-carousel-item
       wNavMenu
       wActiveArea
     el-carousel-item
       wNavMenu
       wDraw
+    el-carousel-item
+      //wNavMenu
+      wDrawControl
+    
 </template>
 
 <script>
+import egridUse from '../workspace/wTable/egridUse.vue'
+import wAddLayer from '../workspace/wBom/wAddLayer.vue'
 export default {
   data() {
     return {}
+  },
+  components: {
+    egridUse: egridUse,
+    wAddLayer: wAddLayer
   }
 }
 </script>

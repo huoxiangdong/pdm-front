@@ -28,13 +28,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
      return { // 静态数据
+       
        //isCollapse: this.$store.state.isCollapse
      }
   },
   computed: { // 动态的数据要放在computed内
+    //...mapState(['isCollapse'])
     collapse(){ return this.$store.state.isCollapse }
   },
   methods: {

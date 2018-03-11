@@ -55,7 +55,7 @@
           <span 
             v-for="control in controls" :key="control.id"  
             :title="control.title" 
-            :class="control.className" 
+            :class="control.className"  
             @click="controlCanvas(control.action)"
           ></span>
         </div>
@@ -139,7 +139,7 @@
       /* document.querySelector('#footer').classList.remove('hide-footer')
       document.querySelector('body').classList.remove('fix-body') */
     },
-    computed: {
+    computed: { // 计算值
       controls () {
         return [{
           title: '上一步',
@@ -252,12 +252,13 @@
         }
         this.canvasMoveUse = false
       },
-      // mousedown 鼠标按下时调用
+      // 1.mousedown 鼠标按下时调用
+      // 鼠标按下开始绘画
       canvasDown (e) {
         console.log('鼠标按下时调用')
-        this.canvasMoveUse = true
+        this.canvasMoveUse = true // 鼠标使用状态
         const canvas = document.querySelector('#canvas') // 获取canvas元素
-        const rect = canvas.getBoundingClientRect()
+        const rect = canvas.getBoundingClientRect() // canvas坐标
         const canvasX = e.clientX - rect.left
         const canvasY = e.clientY - rect.top
         this.setCanvasStyle() //初始化画笔
@@ -270,7 +271,7 @@
         // 当前绘图表面状态
         const preData = this.context.getImageData(0, 0, 600, 400)
         // 当前绘图表面进栈 上一步数组
-        this.preDrawAry.push(preData)
+        this.preDrawAry.push(preData)  // 保存状态
       },
       // 设置颜色
       setColor (color) {

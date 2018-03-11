@@ -1,8 +1,16 @@
 <template lang="pug">
-  el-breadcrumb(separator-class="el-icon-arrow-right")
-    el-breadcrumb-item(:to="{ path: '/' }") 更改
-    el-breadcrumb-item 供应商
-    el-breadcrumb-item 采购数据
+  el-breadcrumb(separator="/")
+    el-breadcrumb-item(:to="{ path: '/' }") Standard: 
+         span MultiConductor
+    el-breadcrumb-item Description:
+         span 3 # 18 LDPE FS PVC
+    el-breadcrumb-item State:
+         span Unconfirmed
+    el-breadcrumb-item Last Update Date:
+         span 01-Aug-2017
+    el-breadcrumb-item Last Upadate By:
+         span admin
+         
 </template>
 
 <script>

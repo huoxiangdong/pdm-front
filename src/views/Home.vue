@@ -14,7 +14,7 @@
         el-main
           WorkSpace(工作区)
       // 底
-      el-footer
+      //el-footer
         AppFooter
 </template>
 

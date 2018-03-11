@@ -2,7 +2,7 @@
    el-menu(:default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect")
     el-menu-item(index="1") 
         i(class="iconfont icon-icok")
-    el-menu-item(index="2" id="search") 
+    //el-menu-item(index="2" id="search") 
         IuputSearch
     el-menu-item(index="3") 
         i(class="iconfont icon-xinzeng") 

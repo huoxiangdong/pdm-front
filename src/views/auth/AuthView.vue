@@ -1,5 +1,6 @@
 <template lang="pug">
   div(class="app-auth flex flex-column flex-ai-center")
+    //Nest()
     Logo
     router-view
     app-footer(:links="links")
@@ -33,7 +34,10 @@
       script.src = '//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js'
       script.type = 'text/javascript'
       // 添加属性 z-index:0 的会创建一个新的层叠上下文 
-      script.setAttribute('zIndex', 0)
+      //script.setAttribute('zIndex', 0)
+      script.setAttribute('color','255,80,0')
+      script.setAttribute('opacity','0.5')
+      //script.setAttribute('count','90')
       document.body.appendChild(script)
       this.script = script
     },
