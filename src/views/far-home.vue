@@ -3,34 +3,80 @@
                                           -----  el-header
                                           -- --  el-aside  el-main
                                           -----  el-footer
-  div
+ 
+  el-container
+    el-header
+      NavMenu(菜单)
+    // 中
     el-container
-      el-header
-        NavMenu(菜单)
-      // 中
-      el-container
-        el-aside
-          side-bar(侧边菜单)
-        el-main
-          WorkSpace(工作区)
-      // 底
-      //el-footer
-        AppFooter
+      el-aside(style="width:200px;transition: width 0s;")
+        side-bar(v-on:setActiveItem="setActiveItem")
+      el-main
+        WorkSpace(ref="carousel")
+    // 底
+    //el-footer
+      AppFooter
 </template>
 
 <script>
-//import { mapActions } from "vuex";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
       formInline: {
         user: "",
         region: ""
-      },
+      }
       //user: { name: "" }
     };
   },
- /*  methods: {
+  computed: {
+    ...mapState(["isCollapse"])
+  },
+  methods: {
+    setActiveItem(index) {
+     // console.log(index)
+      switch(parseInt(index)) {
+        case 1:
+            this.$refs.carousel.$refs.carousel.setActiveItem(index-1)
+            break;
+        case 2: 
+           //console.log(this.$refs.carousel.$refs.carousel)
+          this.$refs.carousel.$refs.carousel.setActiveItem(index-1)
+          break;
+        default: 
+          break
+      }
+      //console.log(this.$refs.carousel.$refs.carousel.setActiveItem);
+      
+      //this.$refs.carousel.next()
+    }
+  },
+  mounted() {},
+  watch: {
+    isCollapse: function() {
+      let el_main = document.getElementsByClassName("el-main");
+      let el_aside = document.getElementsByClassName("el-aside");
+      //let el_main_w = el_main.width
+      if (this.isCollapse == true) {
+        el_aside[0].style.width = "70px";
+      } else {
+        el_aside[0].style.width = "200px";
+      }
+    }
+  }
+
+  /*   directives: {
+    focus: {
+        inserted: function (el, {value}) {
+            if (value) {
+              console.log(value)
+                el.focus();
+            }
+        }
+    }
+}, */
+  /*  methods: {
     ...mapActions(["userLoginOut"]),
     loginOut() { // 登出
       this.userLoginOut();
@@ -41,7 +87,7 @@ export default {
       } else { this.$message.success("登出失败"); }
     }
   }, */
- /*  beforeCreate() {
+  /*  beforeCreate() {
     // 第二次拦截 当主页刷新时，如果服务端设置的token的时效到了的话，便会提示未登录
     if (this.$rest) {  // this.$rest 只读
       this.$rest.user
@@ -61,10 +107,9 @@ export default {
         .catch(err => { this.$message.error(`${err.message}`, "ERROR!"); }); //console.log(err);
     }
   } */
-}
+};
 </script>
 
 <style lang="stylus">
-
 </style>
 

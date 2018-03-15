@@ -12,5 +12,5 @@ export default { }
 </script>
 
 <style lang="stylus">
-@import '../../assets/style/el-card.styl'
+//@import '../../assets/stylus/el-card.styl'
 </style>

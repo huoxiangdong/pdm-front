@@ -9,7 +9,8 @@ const state = {
   token: null,
   username: '',
   isCollapse: false,
-  isOpenAddLayer: false
+  isOpenAddLayer: false,
+  sideBarTitle: []
 
 }
 

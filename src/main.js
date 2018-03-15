@@ -5,12 +5,12 @@ import store from './store/index'
 // 全局组件
 import './views'
 //  iviews
-import './views/components/iviews'
+//import './views/components/iviews'
 
 // element ui
 import Element from 'element-ui'
 //import 'element-ui/lib/theme-chalk/index.css'
-import './assets/style/element-variables.scss'
+import './assets/scss/element-variables.scss'
 
 // icon
 import './assets/icon/iconfont.css'

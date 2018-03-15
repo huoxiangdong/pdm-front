@@ -1,13 +1,13 @@
 <template lang="pug">
   div(class="app-auth flex flex-column flex-ai-center")
     //Nest()
-    Logo
+    far-logo
     router-view
     app-footer(:links="links")
 </template>
 
 <script>
-  import Logo from '../components/Logo.vue'
+  import farLogo from './far-logo'
 
   export default {
     data() {
@@ -27,7 +27,7 @@
         ]
       }
     },
-    components: { Logo },
+    components: { farLogo },
     // 在实例创建完成后被立即调用
     created() {
       const script = document.createElement('script')

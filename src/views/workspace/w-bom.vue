@@ -73,8 +73,8 @@
 
   <script>
 import Data from "./wTable/data";
-import wAddLayerBtn from "./wBom/wAddLayerBtn.vue";
-import wLayerTable from './wBom/wLayerTable.vue'
+import wAddLayerBtn from "./wBom/w-addLayerBtn.vue";
+import wLayerTable from './wBom/w-layerTable.vue'
 
 export default {
   data() {

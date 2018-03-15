@@ -3,21 +3,18 @@
       //  如果用户不存在，跳到登录
       router-link(v-show="!user.name" to="/auth/login") 登录
       // 个人中心
-      el-dropdown(@command="loginOut" placement='bottom-start')
+      el-dropdown(@command="loginOut" placement='bottom-end')
         span(v-show="user.name") {{user.name}}
           img(src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png")
           //i(class="el-icon-caret-bottom el-icon--right")
         // 下拉菜单
         el-dropdown-menu(slot="dropdown")
           el-dropdown-item 
-            i(class="iconfont icon-dengluzhanghao") 
-            i  个人中心
+            i(class="iconfont icon-dengluzhanghao") 个人中心
           el-dropdown-item 
-            i(class="iconfont icon-shezhi") 
-            i  设置
+            i(class="iconfont icon-shezhi") 设置 
           el-dropdown-item(command)
-            i(class="iconfont icon-tuichu") 
-            i  退出登录
+            i(class="iconfont icon-tuichu") 退出登录
 </template>
 
 <script>
@@ -65,6 +62,7 @@ export default {
 </script>
 
 <style lang="stylus">
+
 // 用户头像
 .el-dropdown > span > img 
   width: 20px

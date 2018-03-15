@@ -19,7 +19,7 @@
 
 
 <script type="text/javascript">
-  import Logo from '../components/Logo.vue'
+  //import farLogo from './far-logo'
   export default {
     data() {
       let checkUserName = (rule, value, cb) => {
@@ -98,9 +98,6 @@
           }
         })
       }
-    },
-    components: {
-      Logo
     }
   }
 </script>

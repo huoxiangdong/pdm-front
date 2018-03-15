@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // 加载组件
-import Home from '@/views/Home'
+import Home from '@/views/far-home'
 //import Register from '@/views/Register'
 //import Login from '@/views/Login'
 // test
@@ -44,18 +44,27 @@ const routes = [
   },{ // 验证
     path: '/home',
     component: Home,
-    children: []
+    children: [{
+      path: '/workspace',
+      component: resolve => import('@/views/layout/far-workSpace').then(resolve),
+      children: [{
+        path: 'design',
+        component: resolve => import('@/views/workspace/w-draw').then(resolve)
+      }]
+          
+    }
+    ]
   }, { // 验证
     path: '/auth',
-    component: resolve => import('@/views/auth/AuthView').then(resolve),
+    component: resolve => import('@/views/auth/far-authview').then(resolve),
     children: [{
       path: 'login',
-      component: resolve => import('@/views/auth/Login').then(resolve)
+      component: resolve => import('@/views/auth/far-login').then(resolve)
     },{
       path: 'register',
-      component: resolve => import('@/views/auth/register').then(resolve)
+      component: resolve => import('@/views/auth/far-register').then(resolve)
     }]
-  }
+  },
 ]
 
 // 设置路由拦截

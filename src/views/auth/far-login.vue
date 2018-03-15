@@ -23,7 +23,7 @@
 </template>
 
 <script type="text/javascript">
-  import Logo from '../components/Logo.vue'
+  //import farLogo from './far-logo'
   // 引入vuex /src/helper.js中的辅助函数，
   // 将actions中的方法直接转为组件中的方法
   import { mapActions } from 'vuex'
@@ -121,9 +121,9 @@
         this.$refs['formLogin'].resetFields()
       }
     },
-    components: {
-      Logo
-    }
+   /*  components: {
+      farLogo
+    } */
   }
   
 </script>
