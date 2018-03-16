@@ -1,5 +1,7 @@
 <template lang="pug">
-  el-menu-item(index="5" :style="{float: 'right'}")
+  el-menu-item(
+    index
+    :style="{float: 'right'}")
       //  如果用户不存在，跳到登录
       router-link(v-show="!user.name" to="/auth/login") 登录
       // 个人中心

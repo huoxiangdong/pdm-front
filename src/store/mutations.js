@@ -17,12 +17,21 @@ export const mutations = {
     state.username = ''
   },
   // SideBar折叠
-  [types.COLLAPSE](state) {
+  [types.ISCOLLAPSE](state) {
     state.isCollapse = !state.isCollapse
+  },
+  // SideBar菜单
+  [types.SIDEBARTITLE](state,titles) {
+     state.sidebartitle.push(titles)
   },
   // 打开添加工序
   [types.OPENADDLAYER](state) {
     state.isOpenAddLayer = !state.isOpenAddLayer
+  },
+  // 获取主菜单index
+  [types.NAVINDEX](state,index) {
+    //console.log(index)
+    state.navIndex = index
   }
 }
 

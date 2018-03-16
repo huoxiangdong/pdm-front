@@ -10,7 +10,8 @@ const state = {
   username: '',
   isCollapse: false,
   isOpenAddLayer: false,
-  sideBarTitle: []
+  navIndex:'',
+  sideBarTitle: ['fuck','fuck']
 
 }
 

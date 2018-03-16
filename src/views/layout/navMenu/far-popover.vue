@@ -1,5 +1,8 @@
 <template lang="pug">
-el-menu-item(index="6" :style="{float: 'right'}" v-popover:popover2="" id="popover")
+el-menu-item(
+  index
+  :style="{float: 'right'}" 
+  v-popover:popover2="" id="popover")
   i(class="iconfont icon-xiaoxitongzhi" ) 
   // 标记
   el-badge(:value="12" class="item")

@@ -37,12 +37,12 @@ export default {
     setActiveItem(index) {
      // console.log(index)
       switch(parseInt(index)) {
-        case 1:
-            this.$refs.carousel.$refs.carousel.setActiveItem(index-1)
+        case 0:
+            this.$refs.carousel.$refs.carousel.setActiveItem(index)
             break;
-        case 2: 
+        case 1: 
            //console.log(this.$refs.carousel.$refs.carousel)
-          this.$refs.carousel.$refs.carousel.setActiveItem(index-1)
+          this.$refs.carousel.$refs.carousel.setActiveItem(index)
           break;
         default: 
           break

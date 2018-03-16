@@ -4,39 +4,41 @@
   transition(name="el-zoom-in-center")    
    el-menu(
      id="sidebar"
-    
      :collapse="collapse" 
      @select="handleSelect"
      ) 
-     el-menu-item(index="1")
-       i(class="el-icon-menu")
-       span(slot="title") BOM
-     el-menu-item(index="2")
-       i(class="el-icon-menu")
-       span(slot="title") 电缆设计
-     el-menu-item(index="3")
+     template(v-for="(item,index) in sideBarTitle")
+      el-menu-item(:index="String(index)")
+        i(class="el-icon-menu")
+        span(slot="title") {{ item }}
+      //el-menu-item(index="2")
+        i(class="el-icon-menu")
+        span(slot="title") {{ item }}
+     //el-menu-item(index="3")
        i(class="el-icon-setting")
        span(slot="title") {{collapse}}
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState,mapActions } from 'vuex'
+import Data from './sideBar/far-sideBarTitle'
 export default {
   data() {
      return { // 静态数据
-       
-       //isCollapse: this.$store.state.isCollapse
+       title: null
      }
   },
   computed: { // 动态的数据要放在computed内
-    //...mapState(['isCollapse'])
+    ...mapState(['sideBarTitle']),
     collapse(){ return this.$store.state.isCollapse }
   },
   methods: {
+    //...mapActions(['sideBarTitle']),
       handleSelect(index,indexPath) {
+          console.log(index)
           this.$emit('setActiveItem',index)
       }
-    }
+    },
 }
 </script>
 

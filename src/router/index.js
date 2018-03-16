@@ -42,14 +42,22 @@ const routes = [
     path: '/',
     redirect: '/home'
   },{ // 验证
+    path: '/',
+    redirect: '/home'
+  },{ // 验证
     path: '/home',
     component: Home,
     children: [{
       path: '/workspace',
       component: resolve => import('@/views/layout/far-workSpace').then(resolve),
       children: [{
+        name: 'design',
         path: 'design',
         component: resolve => import('@/views/workspace/w-draw').then(resolve)
+      },{
+        name: 'material',
+        path: 'material',
+        component: resolve => import('@/views/workspace/wMaterial/w-Material').then(resolve)
       }]
           
     }
@@ -98,6 +106,16 @@ const router = new Router({
   routes // 传入路由配置
 }) 
 
+router.beforeEach((to, from, next) => {
+  //console.log(to.path.match(/.*\/index?$/i))
+  
+  if (to.path.match(/.*\/index$/i)) {  // . ->匹配任意字符 \/ ->转义 * ->全匹配 ? ->匹配字符串 $ ->结尾
+     next(false)
+  }else {
+    next()
+  }
+  
+})
 // 导出路由
 export default router
 
