@@ -8,10 +8,11 @@ Vue.use(Vuex)
 const state = {
   token: null,
   username: '',
-  isCollapse: false,
+  isCollapse: true,
   isOpenAddLayer: false,
   navIndex:'',
-  sideBarTitle: ['fuck','fuck']
+  sideBarTitle: ['fuck','good'],
+  navTwoKey: ''
 
 }
 

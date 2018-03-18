@@ -54,7 +54,7 @@ class ajax {
                   this.next = encodeURIComponent(window.location.hash)
                 }
               }
-              window.location.href = '#/login?next=' + this.next
+              window.location.href = 'auth/login?next=' + this.next
               break
             default:
               this.showTips('error:' + err.response.status)
@@ -94,28 +94,34 @@ class ajax {
 
   //  增
   //   参数: path-->路径 
-  create(path, config1 = {
-    cache: false
-  }) {
+  create(path, config1 = { cache: false }) {
+    // createMap={}
     if (!this.createMap[path]) { // cache path closure
       let url = ''
       this.createMap[path] = (data, expand, config2 = {}) => {
-        // 合并config
+        
+        // data是登录提交的formData
+        // 合并config Object.assign合并对象到一个新的{}
+        // config1:{ cache: false } config2:{}
         let config = Object.assign({}, config1, config2)
         // 关闭缓存
-        if (!config.cache) {
+        if (!config.cache) { // true
+          //console.log('这里有执行')
           let headers = config.headers = config.headers || {}
-          headers['Cache-Control'] = 'no-cahce'
-          headers['If-Modified-Since'] = '0'
+          headers['Cache-Control'] = 'no-cahce' // 不写入缓存
+          headers['If-Modified-Since'] = '0' // 上次更新时间戳
         }
         if (expand) {
+          console.log('expand是'+ expand)
           url = path + '/' + expand
         } else {
           url = path
         }
+        console.log(config)
         let baseUrl = config.baseUrl || this.baseUrl
 
         return this.$http.post(baseUrl + url, data, config).then((res) => {
+          console.log(baseUrl + url)
           console.log("这里响应的是" + JSON.stringify(res.data))
           return res.data
         }, (res) => {

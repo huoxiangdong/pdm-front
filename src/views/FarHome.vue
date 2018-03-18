@@ -9,10 +9,13 @@
       NavMenu(菜单)
     // 中
     el-container
-      el-aside(style="width:200px;transition: width 0s;")
+      el-aside(style="width:70px;transition: width 0s;")
         side-bar(v-on:setActiveItem="setActiveItem")
       el-main
-        WorkSpace(ref="carousel")
+        //w-navone
+        w-navtwo
+        router-view
+        //WorkSpace(ref="carousel")
     // 底
     //el-footer
       AppFooter

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // 加载组件
-import Home from '@/views/far-home'
+import FarHome from '@/views/FarHome'
 //import Register from '@/views/Register'
 //import Login from '@/views/Login'
 // test
@@ -46,10 +46,10 @@ const routes = [
     redirect: '/home'
   },{ // 验证
     path: '/home',
-    component: Home,
+    component: FarHome,
     children: [{
       path: '/workspace',
-      component: resolve => import('@/views/layout/far-workSpace').then(resolve),
+      component: resolve => import('@/views/layout/FarWorkSpace').then(resolve),
       children: [{
         name: 'design',
         path: 'design',
@@ -57,7 +57,7 @@ const routes = [
       },{
         name: 'material',
         path: 'material',
-        component: resolve => import('@/views/workspace/wMaterial/w-Material').then(resolve)
+        component: resolve => import('@/views/workspace/wMaterial/wMaterial').then(resolve)
       }]
           
     }

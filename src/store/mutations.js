@@ -32,6 +32,10 @@ export const mutations = {
   [types.NAVINDEX](state,index) {
     //console.log(index)
     state.navIndex = index
+  },
+  // 获取navtwo key
+  [types.NAVTWOKEY](state,key) {
+    state.navTwoKey = key
   }
 }
 

@@ -7,10 +7,10 @@
      :collapse="collapse" 
      @select="handleSelect"
      ) 
-     template(v-for="(item,index) in sideBarTitle")
+     template(v-for="(item,index) in sideBarTitle" )
       el-menu-item(:index="String(index)")
         i(class="el-icon-menu")
-        span(slot="title") {{ item }}
+        span(slot="title" ) {{ item }}
       //el-menu-item(index="2")
         i(class="el-icon-menu")
         span(slot="title") {{ item }}

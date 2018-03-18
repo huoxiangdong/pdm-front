@@ -90,7 +90,7 @@
           if (valid) {
             // 通过验证之后才请求登录接口
             // 表单验证通过--> config:user.login --> /api/login
-            this.$rest.user.login(formData).then(res => {
+            this.$rest.submit.login(formData).then(res => {
                 if (res.success) {
                   console.log(res.data)
                   this.userLogin(res.data) // store 本地存储token
@@ -129,7 +129,7 @@
 </script>
 
 /* 必须设置scoped，负责设置的样式污染全局 */
-<style lang="stylus">
+<style lang="stylus" scoped>
 .el-card 
   margin: 0 auto
   /* margin-top: 3%; */

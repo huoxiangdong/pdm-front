@@ -19,7 +19,7 @@
     el-menu-item(index="/workspace/material")
       template(slot="title") 物料管理
     // 4 个人中心
-    User
+    far-user
     // 消息
     Popover
       

@@ -12,11 +12,14 @@
         // 下拉菜单
         el-dropdown-menu(slot="dropdown")
           el-dropdown-item 
-            i(class="iconfont icon-dengluzhanghao") 个人中心
+            | <i class="iconfont icon-dengluzhanghao"></i>
+            | 个人中心
           el-dropdown-item 
-            i(class="iconfont icon-shezhi") 设置 
+            i(class="iconfont icon-shezhi") 
+            span &nbsp&nbsp设置 
           el-dropdown-item(command)
-            i(class="iconfont icon-tuichu") 退出登录
+            i(class="iconfont icon-tuichu") 
+            span &nbsp&nbsp退出登录
 </template>
 
 <script>
@@ -35,7 +38,7 @@ export default {
       this.userLoginOut();
       this.user.name = null; // name置null
       if (!this.$store.state.token) {
-        this.$router.push("/auth/login");
+        this.$router.push("#/auth/login");
         this.$message.success("登出成功");
       } else { this.$message.success("登出失败"); }
     }
@@ -43,7 +46,7 @@ export default {
   beforeCreate() {
     // 第二次拦截 当主页刷新时，如果服务端设置的token的时效到了的话，便会提示未登录
     if (this.$rest) {  // this.$rest 只读
-      this.$rest.user
+      this.$rest.submit
         .token() // 验证 token
         .then(res => { //console.log(this.$rest)
           if (!res.success) {
@@ -70,4 +73,7 @@ export default {
   width: 20px
   height: 20px
   margin-bottom: 6px;
+.el-dropdown-menu__item
+  color: #000
+  font-size:10px
 </style>

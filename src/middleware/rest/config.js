@@ -7,9 +7,12 @@ ajax.setTipFn((tips) => {
 })
 
 export default {
-  user: {
+  submit: {
     register: ajax.create('/api/register'),
     login: ajax.create('/api/login'),
-    token: ajax.query('/api/token')
+    token: ajax.query('/api/token'),
+    addMaterial: ajax.create('/api/material'),
+    queryMaterial: ajax.create('/api/material/query'),
+    
   },
 }

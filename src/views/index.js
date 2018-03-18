@@ -9,12 +9,12 @@ import Nest from 'vue-atom-canvas'
 
 // layout
 import farSideBar from './layout/far-sideBar'
-import farWorkSpace from './layout/far-workSpace'
+import FarWorkSpace from './layout/FarWorkSpace'
 import farFooter from './layout/far-footer'
 // navmenu
 import farNavMenu from './layout/far-navMenu.vue'
 import farPopover from './layout/navmenu/far-popover'
-import farUser from './layout/navmenu/far-user.vue'
+import FarUser from './layout/navmenu/FarUser.vue'
 import farIuputSearch from './layout/navmenu/far-popover'
 
 // workspace
@@ -26,7 +26,7 @@ import wDraw from './workspace/w-draw'
 import wBom from './workspace/w-bom.vue'
 // wNavMenu
 import wNavOne from './workspace/wNavMenu/w-navOne.vue'
-import wNavTwo from './workspace/wNavMenu/w-navTwo.vue'
+import wNavTwo from './workspace/wNavMenu/wNavTwo.vue'
 import wNavThree from './workspace/wNavMenu/w-navThree.vue'
 import wActiveAreaHeader from './workspace/wNavMenu/w-activeAreaHeader.vue'
 // wDraw
@@ -43,10 +43,10 @@ import wMainBomTable from './workspace/wTable/w-mainBomTable.vue'
 // layout
 Vue.component('NavMenu', farNavMenu)
 Vue.component('SideBar', farSideBar)
-Vue.component('WorkSpace', farWorkSpace)
+Vue.component('FarWorkSpace', FarWorkSpace)
 Vue.component('AppFooter', farFooter)
 Vue.component('Popover', farPopover)
-Vue.component('User', farUser)
+Vue.component('FarUser', FarUser)
 Vue.component('IuputSearch', farIuputSearch)
 
 // workspace
@@ -57,9 +57,9 @@ Vue.component('wTable',wTable)
 Vue.component('wDraw', wDraw)
 Vue.component('wBom', wBom)
 // wNavMenu
-Vue.component('wNavOne', wNavOne)
-Vue.component('wNavTwo', wNavTwo)
-Vue.component('wNavThree', wNavThree)
+Vue.component('w-navone', wNavOne)
+Vue.component('w-navtwo', wNavTwo)
+Vue.component('w-navthree', wNavThree)
 Vue.component('wActiveAreaHeader',wActiveAreaHeader)
 // wDraw
 Vue.component('wDrawSpace', wDrawSpace)

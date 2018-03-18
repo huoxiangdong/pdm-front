@@ -1,15 +1,27 @@
 <template lang="pug">
   div
-    el-card(class="box-card")
-      el-form(:model="formRegister" :rules="rules" ref="formRegister")
+    el-card.box-card
+      // model 验证需要
+      el-form(
+        :model="formRegister" 
+        :rules="rules" 
+        ref="formRegister")
+        // prop 传入 Form 组件的 model 中的字段
         el-form-item(label="请输入账号" prop="name")
-          el-input(v-model="formRegister.name" size="medium")
+          el-input(
+            size="medium"
+            v-model="formRegister.name" 
+            )
         
         el-form-item(label="请输入密码" prop="password" size="medium")
-          el-input(type="password" v-model="formRegister.password")
+          el-input(
+            type="password" 
+            v-model="formRegister.password")
       
         el-form-item(label="请确认密码" prop="checkPassword")
-          el-input(type="password" v-model="formRegister.checkPassword")
+          el-input(
+            type="password" 
+            v-model="formRegister.checkPassword")
        
         el-form-item
         el-form-item
@@ -22,6 +34,7 @@
   //import farLogo from './far-logo'
   export default {
     data() {
+      // 验证规则
       let checkUserName = (rule, value, cb) => {
         // 禁止账号为空格 value.match(/^\s+$/gi)
         if (!value || value.match(/^\s+$/gi)) {
@@ -53,6 +66,7 @@
           password: '',
           checkPassword: ''
         },
+        // 触发规则
         rules: {
           name: [{
             validator: checkUserName,
@@ -70,23 +84,24 @@
       }
     },
     methods: {
+      // 提交
       addUser() {
-        //console.log(this.$rest)
+        console.log(this.formRegister)
         let user = this.formRegister
         let formData = {
           name: user.name,
           password: user.password
         }
         // 表单验证
-        this.$refs['formRegister'].validate((valid) => {
+        this.$refs['formRegister'].validate((valid) => { //this.$refs['formRegister'] 获取对象属性
           if (valid) {
-            this.$rest.user.register(formData)
+            this.$rest.submit.register(formData) // 提交
               .then(res => {
                 if (!res.success) {
                   this.$message.error(res.message)
                 } else {
                   this.$message.success(res.message)
-                  this.$router.push('/login')
+                  this.$router.push('auth/login')
                 }
               })
               .catch(err => {

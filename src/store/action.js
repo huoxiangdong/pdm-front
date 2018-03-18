@@ -13,7 +13,9 @@ const actions = {
 
   openAddLayer({ commit }) { commit(types.OPENADDLAYER) },
 
-  setNavIndex( {commit },index) { commit(types.NAVINDEX,index) } // 获取主菜单index
+  setNavIndex( { commit }, index) { commit(types.NAVINDEX,index) }, // 获取主菜单index
+
+  getNavTwoKey( { commit }, key) { commit(types.NAVTWOKEY, key) }
 
 
 }

@@ -1,13 +1,20 @@
 <template lang="pug">
-   el-menu(:default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect")
+   el-menu(
+       class="el-menu-demo"
+       mode="horizontal" 
+       :default-active="activeIndex"  
+       @select="selectHandle"
+       )
     el-menu-item(index="1") 
         i(class="iconfont icon-icok")
     //el-menu-item(index="2" id="search") 
         IuputSearch
-    el-menu-item(index="3") 
+    el-menu-item(index="2") 
         i(class="iconfont icon-xinzeng") 
-    el-menu-item(index="4") 
+    el-menu-item(index="3") 
         i(class="iconfont icon-baocun-tianchong")
+    el-menu-item(index="4") 
+        i(class="iconfont icon-sousuo-tianchong")   
     el-menu-item(index="5") 
         i(class="iconfont icon-zuo")
     el-menu-item(index="6") 
@@ -19,16 +26,26 @@
 </template>
 
 <script>
+import { mapState,mapActions } from 'vuex';
 export default {
   data() {
     return {
       // 菜单默认激活状态
       activeIndex: "1",
+      
     };
   },
+  computed: {
+      ...mapState(['navTwoKey']),
+     /*  key: function() {
+          return Array.from({length:10}).map(function(item,index){return index})
+      } */
+  },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+    ...mapActions(['getNavTwoKey']),
+    selectHandle(key, keyPath) {
+      this.getNavTwoKey(~~key)
+      console.log(this.navTwoKey);
     }
   }
 };
