@@ -3,6 +3,10 @@
 import axios from 'axios'
 
 /* 创建ajax类 */
+/* 类的创建
+class name {
+  constructor() {}
+} */
 class ajax {
   constructor(options) {
     this.$http = axios
@@ -16,26 +20,36 @@ class ajax {
     this.deleteMap = {}
     this.logining = false // 正在登陆
     this.next = ''
+    // 传入的tips ？
     this.showTips = (tips) => { // 输出提示
       if (window.console) {
         console.log(tips)
       }
     }
+    
     // 通用拦截器
-    if (options && typeof options.success === 'function') {
-      this.success = options.success
+    if (options && typeof options.success === 'function') { // true: options传入并且 options.success是函数
+     
+      this.success = options.success // 挂载为 ajax.success
     } else {
-      this.success = res => {}
+      this.success = res => {} // ƒ (res) {}
+     
     }
-
+    
     // ajax 全局响应错误处理
-    axios.interceptors.response.use(
+    axios.interceptors.response.use( // axios方法
       response => {
-        this.success(response)
+        console.log(`ajax拦截响应:`)
+        console.log(response)
+        this.success(response) 
         return response
       },
+      
       err => {
         if (err.response) {
+          console.log(`ajax拦截错误响应:`)
+          console.log(response)
+          // 返回错误状态
           switch (err.response.status) {
             case 404:
               this.showTips('请求发生404错误')
@@ -50,13 +64,22 @@ class ajax {
             case 401: // 用户没有登录态
               if (!this.logining) { // 只使第一次401的hash
                 this.logining = true
-                if (window.location.hash) {
+                // 如果有锚链接
+                if (window.location.hash) { 
+                  // location是js里边管理地址栏的内置对象
+                  // location.hash则可以用来获取或设置页面的标签值
+                  // #代表网页中的一个位置 位置标识符可以为 name锚点 id 属性
+                  // window.location.href表示重定向，后面跟着的是完整的url地址,得到和使用的是完整的url
+                  // window.location.hash得到的是锚链接,相比如href,通过window.location.hash并不会跳转到新的链接，只会在当前链接里面
+                  // encodeURIComponent 编码
+                  console.log(window.location.hash)
                   this.next = encodeURIComponent(window.location.hash)
                 }
               }
-              window.location.href = 'auth/login?next=' + this.next
+              // 401重定向
+              //window.location.href = 'auth/login?next=' + this.next
               break
-            default:
+            default: // 默认处理 401错误提示
               this.showTips('error:' + err.response.status)
               break
           }
@@ -68,13 +91,13 @@ class ajax {
 
   // 设置用展示提示信息的函数
   setTipFn(fn) {
-    this.showTips = fn
+    this.showTips = fn // 将fn传给this.showTips 即console.log(fn)
   }
   // 设置自定义的回调
   setSuccess(success) {
     this.success = success
   }
-
+  // ?
   parse(path, id) {
     if (typeof id === 'string') {
       return path + '/' + id
@@ -267,6 +290,7 @@ class ajax {
 
 }
 
+// 导出ajax实例
 export default new ajax()
 
 

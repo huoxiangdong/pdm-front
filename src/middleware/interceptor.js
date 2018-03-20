@@ -1,8 +1,10 @@
-// 拦截
+// 拦截请求
 import axios from 'axios'
 import router from '@/router'
 
+// 超时
 axios.default.timeout = 5000
+// 请求头
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 // axios拦截请求
@@ -17,7 +19,7 @@ axios.interceptors.request.use(
     } else {
       console.log(localStorage.getItem('token'))
       router.replace({
-        path: 'auth/login',
+        path: '/auth/login',
         query: {
           redirect: router.currentRoute.fullPath
         }

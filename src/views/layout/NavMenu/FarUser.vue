@@ -38,7 +38,7 @@ export default {
       this.userLoginOut();
       this.user.name = null; // name置null
       if (!this.$store.state.token) {
-        this.$router.push("#/auth/login");
+        this.$router.push("/auth/login");
         this.$message.success("登出成功");
       } else { this.$message.success("登出失败"); }
     }

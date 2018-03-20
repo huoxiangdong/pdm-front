@@ -87,61 +87,76 @@ export default {
       var state = function() {
         setTimeout(function() {
           self.getNavTwoKey(~~0);
-        }, 1000)
-      }
-     
+        }, 1000);
+      };
+
       console.log("new: %s, old: %s", val, oldVal);
 
-      if ( val == 2 ) {
+      if (val == 2) {
         this.formMaterial = {};
-        state()
-      }else if( val === 3 ) {
+        state();
+      } else if (val === 3) {
+        // 保存
         if (this.$rest) {
-            this.$rest.submit.addMaterial(this.formMaterial) // 提交
-              .then(res => {
-                if (!res.success) {
-                  this.$message.error(res.message)
-                } else {
-                 
-                  this.$message.success(res.message)
-                }
-              })
-              .catch(err => {
-                this.$message.error(`${err.message}`)
-              })
-          } else {
-            this.$message.error('请输入账号、密码后再注册!')
-            return false
-          }
-          state()
-    
-      }else if( val === 4 ) {
+          this.$rest.submit
+            .addMaterial(this.formMaterial) // 提交
+            .then(res => {
+              if (!res.success) {
+                console.log(res);
+                this.$message.error(res.message);
+              } else if (res.data !== null && res.data.errno ) {
+                console.log(res);
+                const h = this.$createElement
+                this.$message({
+                  showClose: true,
+                  type: "error",
+                  message: h("div", null, [
+                    h("p", null, res.data.sqlMessage),
+                    h("p", { style: "margin-top:3px" }, res.data.sql)
+                  ])
+                });
+              }else {
+                this.$message.warning(res.message)
+
+              }
+            })
+            .catch(err => {
+              this.$message.error(`${err.message}`);
+            });
+        } else {
+          this.$message.error("请输入账号、密码后再注册!");
+          return false;
+        }
+        state();
+      } else if (val === 4) {
         if (this.$rest) {
-            this.$rest.submit.queryMaterial(this.formMaterial) // 提交
-              .then(res => {
-                if (!res.success) {
-                  this.$message.error(res.message)
-                } else {
-                   this.formMaterial = res.data
-                  this.$message.success(res.message)
-                }
-              })
-              .catch(err => {
-                this.$message.error(`${err.message}`)
-              })
-          } else {
-            this.$message.error('请输入账号、密码后再注册!')
-            return false
-          }
-          state()
-    
-      }else if( val === 1) {
-         console.log(JSON.stringify(this.formMaterial['MaterialNumber',null,2]))
-         state()
+          this.$rest.submit
+            .queryMaterial(this.formMaterial) // 提交
+            .then(res => {
+              if (!res.success) {
+                this.$message.error(res.message);
+              } else {
+                this.formMaterial = res.data;
+                this.$message.success(res.message);
+              }
+            })
+            .catch(err => {
+              this.$message.error(`${err.message}`);
+            });
+        } else {
+          this.$message.error("请输入账号、密码后再注册!");
+          return false;
+        }
+        state();
+      } else if (val === 1) {
+        console.log(
+          JSON.stringify(this.formMaterial[("MaterialNumber", null, 2)])
+        );
+        state();
       }
     }
   }
-}
+};
 </script>
 
 <style lang="stylus">

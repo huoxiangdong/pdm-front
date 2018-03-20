@@ -31,7 +31,7 @@ Vue.config.productionTip = false
 
 Vue.use(Element)
 /* eslint-disable no-new */
-new Vue({
+var v = new Vue({
   el: '#app',
   router,
   store,
@@ -40,3 +40,8 @@ new Vue({
   //components: { App },
   //template: '<App/>'
 })
+
+/* import Rest from './middleware/rest/plugin'
+Rest.install()
+v.$rest = Rest */
+//console.log( toArray) 

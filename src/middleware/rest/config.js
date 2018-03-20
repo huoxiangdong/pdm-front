@@ -1,7 +1,7 @@
 import { Message } from 'element-ui'
 import ajax from './ajax'
 
-// 设置错误提示信息
+// 使用 el message方法弹出错误
 ajax.setTipFn((tips) => {
   Message.error(tips)
 })
