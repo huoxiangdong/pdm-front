@@ -17,7 +17,7 @@
       )
       template(v-for="(value, key, index) in formMaterial")
          el-input(v-model="formMaterial[key].value")
-           template(slot="prepend") 库存数量小位数
+           template(slot="prepend") {{ formMaterial[key].title }}
 
  
 </template>
@@ -28,7 +28,6 @@ import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-      titles: Data.titles,
       formMaterial: Data.formMaterial
     };
   },
@@ -41,19 +40,14 @@ export default {
   watch: {
     navTwoKey: function(val, oldVal) {
       var self = this;
+      // 重置菜单点击状态
       var state = function() {
         setTimeout(function() {
           self.getNavTwoKey(~~0);
         }, 1000);
       };
-
-      console.log("new: %s, old: %s", val, oldVal);
-
-      if (val == 2) {
-        this.formMaterial = {};
-        state();
-      } else if (val === 3) {  // 保存
-        console.log('提交内容')
+      // 获取提交内容
+         console.log('提交内容')
       /*  var sb = Object.keys(this.formMaterial).map((data,index) => {
          //[data]:this.formMaterial[data].value}
          //var j = Object.assign({},data[index],data)
@@ -61,16 +55,19 @@ export default {
        var sb1 = sb.map((data,index)=> { return index})
        var obj = Object.assign({},sb[0])
        var obj2 = Object.assign({},obj) */
-       let obj = {}
-       for (let key in this.formMaterial) {
-          obj[key] = this.formMaterial[key].value   
-       }
-        console.log(obj)
+       let formData = {}
+       for (let key in this.formMaterial) { formData[key] = this.formMaterial[key].value }
+        console.log(formData)
+      console.log("new: %s, old: %s", val, oldVal);
 
-        
+       if (val === 2) {
+         for (let key in this.formMaterial) { this.formMaterial[key].value = '' }
+        state();  
+      } else if (val === 3) {  // 保存
+     
         if (this.$rest) {
           this.$rest.submit
-            .addMaterial(this.formMaterial) // 提交
+            .addMaterial(formData) // 提交
             .then(res => {
               if (!res.success) {
                 console.log(res);
@@ -99,15 +96,20 @@ export default {
           return false;
         }
         state();
-      } else if (val === 4) {
+      } else if (val === 4) {  // 查询
         if (this.$rest) {
           this.$rest.submit
-            .queryMaterial(this.formMaterial) // 提交
+            .queryMaterial(formData) // 提交
             .then(res => {
               if (!res.success) {
                 this.$message.error(res.message);
               } else {
-                this.formMaterial = res.data;
+                for (let key in res.data) { 
+                  this.formMaterial[key].value = res.data[key]
+                  //console.log(res.data[key])
+                  //console.log(this.formMaterial[key].value)
+                 }
+                //this.formMaterial = res.data;
                 this.$message.success(res.message);
               }
             })
