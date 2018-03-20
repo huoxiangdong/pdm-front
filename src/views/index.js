@@ -90,5 +90,5 @@ Vue.component('Nest', Nest)
 
 
 // wMaterialCard
-import wMaterialCard from './workspace/wMaterial/wMaterialCard'
-Vue.use(wMaterialCard)
+import wCard from './workspace/wMaterial/wMaterialCard'
+Vue.use(wCard)

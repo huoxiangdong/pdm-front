@@ -45,7 +45,7 @@ export default {
     ...mapActions(['getNavTwoKey']),
     selectHandle(key, keyPath) {
       this.getNavTwoKey(~~key)
-      console.log(this.navTwoKey);
+      //console.log(this.navTwoKey);
     }
   }
 };

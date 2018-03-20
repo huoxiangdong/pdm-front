@@ -40,7 +40,17 @@ export default {
             title:'库存数量小位数',
             value:''
         }
+      },
+      initInputData: {
+        MaterialNumber: "",
+        Preset: "",
+        MaterialClass: "",
+        BarCode: "",
+        MaterialName: "",
+        BatchNumber: "",
+        Standard_1: "",
+        Standard_2: "",
+        Unit: "",
+        Quantity: ""
       }
-
-    
 }

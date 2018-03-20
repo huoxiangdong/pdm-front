@@ -39,8 +39,8 @@ class ajax {
     // ajax 全局响应错误处理
     axios.interceptors.response.use( // axios方法
       response => {
-        console.log(`ajax拦截响应:`)
-        console.log(response)
+        console.log(`ajax全局拦截响应:`)
+        console.log(JSON.stringify(response,null,2))
         this.success(response) 
         return response
       },
@@ -48,7 +48,7 @@ class ajax {
       err => {
         if (err.response) {
           console.log(`ajax拦截错误响应:`)
-          console.log(response)
+          console.log(JSON.stringify(response,null,2))
           // 返回错误状态
           switch (err.response.status) {
             case 404:
@@ -116,7 +116,7 @@ class ajax {
   }
 
   //  增
-  //   参数: path-->路径 
+  //  参数: path-->路径 
   create(path, config1 = { cache: false }) {
     // createMap={}
     if (!this.createMap[path]) { // cache path closure
@@ -140,12 +140,13 @@ class ajax {
         } else {
           url = path
         }
-        console.log(config)
+       
         let baseUrl = config.baseUrl || this.baseUrl
-
+        console.log(`请求的数据:`)
+        console.log(`url:` + baseUrl + url + `\n`, JSON.stringify(data,null,2), JSON.stringify(config,null,2))
         return this.$http.post(baseUrl + url, data, config).then((res) => {
           console.log(baseUrl + url)
-          console.log("这里响应的是" + JSON.stringify(res.data))
+          console.log(`POST请求拦截响应:\n` + JSON.stringify(res.data,null,2))
           return res.data
         }, (res) => {
           return res
