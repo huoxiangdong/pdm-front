@@ -1,16 +1,27 @@
 <template lang="pug">
 div
-  w-materialcard
+  w-materialcard(
+    cardHeaderTitle="基本信息"
+    :inputGrid="inputGrid"
+    :baseData="materialData"
+  )
 
 </template>
 
 <script>
-import wMaterialCard from './wMaterialCard'
+import Data from "./wMaterialCard/MaterialData";
 export default {
-  components: {
-    'w-materialcard': wMaterialCard
+  data(){
+    return {
+      materialData: Data.materialData,
+      inputGrid: {
+        display:'grid',
+        'grid-template-columns':'1fr 1fr',
+        'grid-row-gap':'15px',
+        'grid-column-gap':'100px'
+        }
+    }
   }
-
 
 }
 </script>

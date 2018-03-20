@@ -6,33 +6,82 @@
    // 槽 插到 slot header内
       <div class="el-card__header" v-if="$slots.header || header">
       <slot name="header">{{ header }}</slot>
+      有个具名插槽header，将基本信息代码段插到header插槽
    div(slot="header")
-      span(style="font-size:13px;font-weight:bolder;") 基本信息
+      span(style="font-size:13px;font-weight:bolder;") {{ cardHeaderTitle }}
    el-form(
        class="el-from"
-       :model="formMaterial" 
+       :model="baseData" 
        )
-    div(
-      :style="{'display':'grid','grid-template-columns':'1fr 1fr','grid-row-gap':'15px','grid-column-gap':'100px'}"
-      )
-      template(v-for="(value, key, index) in formMaterial")
-         el-input(v-model="formMaterial[key].value")
-           template(slot="prepend") {{ formMaterial[key].title }}
-
- 
+    div(:style="inputGrid")
+      template(v-for="(value, key, index) in baseData")
+         el-input(v-model="value['value']")
+            template(slot="prepend") {{ value['title'] }}
 </template>
 
 <script>
-import Data from "./wMaterialData";
+
 import { mapState, mapActions } from "vuex";
 export default {
+  name:'wMaterialcard',
+  props: {
+   /*  data: {
+      type: Array,
+      default () {
+        return []
+      }
+    }, */
+/* 
+
+    columnType: [String, Array],
+
+    columnKeyMap: Object,
+
+    columnsProps: Object,
+
+    columnsSchema: Object,
+
+    columnsHandler: Function, */
+    baseData: Object,
+
+    cardHeaderTitle: {
+      type: String,
+      required: true
+    },
+    inputGrid: [Object]
+  },
   data() {
     return {
-      formMaterial: Data.formMaterial
+      
     };
   },
   computed: {
-    ...mapState(["navTwoKey"])
+    ...mapState(["navTwoKey"]),
+    // input值
+    observerValue: {
+      get: function() {
+        let obj = {}
+        for (let key in this.baseData) { obj[key] = this.baseData[key].value }
+        return obj
+      },
+      //  查询等
+      set: function(val) {
+         console.log('获取的内容')
+        //console.log(val) 
+        let obj = {}
+        for (let key in val) { this.baseData[key].value = val[key]}  
+        console.log(this.baseData)
+        
+        //return 
+        //for (let key in this.baseData) { this.materialValue = this.baseData[key].value  }
+      }
+    },
+    // 表单提交内容
+    formData: function() {
+       let formData = {}
+       for (let key in this.baseData) { formData[key] = this.baseData[key].value }
+       return formData
+    }
   },
   methods: {
     ...mapActions(["getNavTwoKey"])
@@ -55,19 +104,17 @@ export default {
        var sb1 = sb.map((data,index)=> { return index})
        var obj = Object.assign({},sb[0])
        var obj2 = Object.assign({},obj) */
-       let formData = {}
-       for (let key in this.formMaterial) { formData[key] = this.formMaterial[key].value }
-        console.log(formData)
+       
       console.log("new: %s, old: %s", val, oldVal);
 
        if (val === 2) {
-         for (let key in this.formMaterial) { this.formMaterial[key].value = '' }
+         for (let key in this.baseData) { this.baseData[key].value = '' }
         state();  
       } else if (val === 3) {  // 保存
      
         if (this.$rest) {
           this.$rest.submit
-            .addMaterial(formData) // 提交
+            .addMaterial(this.formData) // 提交
             .then(res => {
               if (!res.success) {
                 console.log(res);
@@ -99,16 +146,18 @@ export default {
       } else if (val === 4) {  // 查询
         if (this.$rest) {
           this.$rest.submit
-            .queryMaterial(formData) // 提交
+            .queryMaterial(this.formData) // 提交
             .then(res => {
               if (!res.success) {
                 this.$message.error(res.message);
               } else {
-                for (let key in res.data) { 
-                  this.formMaterial[key].value = res.data[key]
+                //console.log(this.materialValue)
+                this.observerValue = res.data
+               /*  for (let key in res.data) { 
+                  this.materialValue = res.data
                   //console.log(res.data[key])
                   //console.log(this.formMaterial[key].value)
-                 }
+                 } */
                 //this.formMaterial = res.data;
                 this.$message.success(res.message);
               }
@@ -117,14 +166,12 @@ export default {
               this.$message.error(`${err.message}`);
             });
         } else {
-          this.$message.error("请输入账号、密码后再注册!");
+          this.$message.error("😝 我也不晓得咋办了");
           return false;
         }
         state();
       } else if (val === 1) {
-        console.log(
-          JSON.stringify(this.formMaterial[("MaterialNumber", null, 2)])
-        );
+        console.log(this.materialValue);
         state();
       }
     }
@@ -160,11 +207,11 @@ export default {
 .el-from {
   margin-top: 0px;
 }
+*/
 
-
-
+// 滚动
 .el-carousel__item.is-active {
   overflow-y: auto;
   overflow-x: hidden;
-} */
+} 
 </style>

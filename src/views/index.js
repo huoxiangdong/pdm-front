@@ -87,3 +87,8 @@ Vue.component('Nest', Nest)
 // 注册到全局
 //Vue.component(VTable.name, VTable)
 //Vue.component(VPagination.name, VPagination)
+
+
+// wMaterialCard
+import wMaterialCard from './workspace/wMaterial/wMaterialCard'
+Vue.use(wMaterialCard)
