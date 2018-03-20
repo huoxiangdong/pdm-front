@@ -10,48 +10,16 @@
       span(style="font-size:13px;font-weight:bolder;") 基本信息
    el-form(
        class="el-from"
-       :inline="true" 
        :model="formMaterial" 
-       size="mini" 
        )
-    el-row(type="flex" justify="space-around")
-      el-col(:span="8")
-          el-input(v-model="formMaterial.MaterialNumber")
-            template(slot="prepend") 物料编号
-      el-col(:span="8")
-          el-input(v-model="formMaterial.Preset")
-           template(slot="prepend") 预设来源类型
-
-    el-row(type="flex" justify="space-around")
-      el-col(:span="8")
-          el-input(v-model="formMaterial.MaterialClass")
-           template(slot="prepend") 物料种类
-      el-col(:span="8")
-          el-input(v-model="formMaterial.BarCode")
-           template(slot="prepend") 条形码
-
-    el-row(type="flex" justify="space-around")
-      el-col(:span="8")
-          el-input(v-model="formMaterial.MaterialName")
-           template(slot="prepend") 物料名称
-      el-col(:span="8")
-          el-input(v-model="formMaterial.BatchNumber")
-           template(slot="prepend") 批号控制
-    el-row(type="flex" justify="space-around")
-      el-col(:span="8")
-          el-input(v-model="formMaterial.Standard_1")
-           template(slot="prepend") 规格1
-      el-col(:span="8")
-          el-input(v-model="formMaterial.Standard_2")
-           template(slot="prepend") 规格2
-    el-row(type="flex" justify="space-around")
-      el-col(:span="8")
-          el-input(v-model="formMaterial.Unit")
-           
-            template(slot="prepend") 库存单位
-      el-col(:span="8")
-          el-input(v-model="formMaterial.Quantity")
+    div(
+      :style="{'display':'grid','grid-template-columns':'1fr 1fr','grid-row-gap':'15px','grid-column-gap':'100px'}"
+      )
+      template(v-for="(value, key, index) in formMaterial")
+         el-input(v-model="formMaterial[key].value")
            template(slot="prepend") 库存数量小位数
+
+ 
 </template>
 
 <script>
@@ -60,19 +28,8 @@ import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-      titles: Data.title,
-      formMaterial: {
-        MaterialNumber: "",
-        Preset: "",
-        MaterialClass: "",
-        BarCode: "",
-        MaterialName: "",
-        BatchNumber: "",
-        Standard_1: "",
-        Standard_2: "",
-        Unit: "",
-        Quantity: ""
-      }
+      titles: Data.titles,
+      formMaterial: Data.formMaterial
     };
   },
   computed: {
@@ -95,8 +52,22 @@ export default {
       if (val == 2) {
         this.formMaterial = {};
         state();
-      } else if (val === 3) {
-        // 保存
+      } else if (val === 3) {  // 保存
+        console.log('提交内容')
+      /*  var sb = Object.keys(this.formMaterial).map((data,index) => {
+         //[data]:this.formMaterial[data].value}
+         //var j = Object.assign({},data[index],data)
+         return data})
+       var sb1 = sb.map((data,index)=> { return index})
+       var obj = Object.assign({},sb[0])
+       var obj2 = Object.assign({},obj) */
+       let obj = {}
+       for (let key in this.formMaterial) {
+          obj[key] = this.formMaterial[key].value   
+       }
+        console.log(obj)
+
+        
         if (this.$rest) {
           this.$rest.submit
             .addMaterial(this.formMaterial) // 提交
@@ -160,15 +131,22 @@ export default {
 </script>
 
 <style lang="stylus">
-.el-card__header {
-  background-color: #999999;
-}
+.el-card__header 
+  background-color: #999999
+.box-card 
+  margin: 10px 60px
 
-.box-card {
-  margin: 10px 60px;
-}
+.el-from 
+   margin: auto 50px
 
-.el-row {
+// title
+.el-input-group__prepend {
+  width: 100px;
+  text-align: left;
+}
+/* .el-input__inner
+   width: 250px */
+/* .el-row {
   margin-bottom: 5px;
 
   &:last-child {
@@ -181,13 +159,10 @@ export default {
   margin-top: 0px;
 }
 
-.el-input-group__prepend {
-  width: 100px;
-  text-align: left;
-}
+
 
 .el-carousel__item.is-active {
   overflow-y: auto;
   overflow-x: hidden;
-}
+} */
 </style>
