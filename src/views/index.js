@@ -8,14 +8,14 @@ import Vue from 'vue'
 import Nest from 'vue-atom-canvas'
 
 // layout
-import farSideBar from './layout/far-sideBar'
+import farSideBar from './layout/SideBar/farSideBar'
 import FarWorkSpace from './layout/FarWorkSpace'
-import farFooter from './layout/far-footer'
+import farFooter from './layout/farFooter'
 // navmenu
-import farNavMenu from './layout/far-navMenu.vue'
-import farPopover from './layout/navmenu/far-popover'
+import farNavMenu from './layout/NavMenu/farNavMenu.vue'
+import farPopover from './layout/NavMenu/farPopover'
 import FarUser from './layout/navmenu/FarUser.vue'
-import farIuputSearch from './layout/navmenu/far-popover'
+import farIuputSearch from './layout/NavMenu/farIuputSearch.vue'
 
 // workspace
 import wNavMenu from './workspace/w-navMenu.vue'

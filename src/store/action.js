@@ -9,13 +9,14 @@ const actions = {
 
   isCollapse({ commit }) { commit(types.ISCOLLAPSE) }, // sidebar折叠
 
-  sideBarTitle({ commit }) { commit(types.SIDEBARTITLE) }, // sidebar菜单
 
   openAddLayer({ commit }) { commit(types.OPENADDLAYER) },
 
-  setNavIndex( { commit }, index) { commit(types.NAVINDEX,index) }, // 获取主菜单index
+  getSideBarIndex({ commit }, index) { commit(types.SIDEBARINDEX,index) }, // 获取sidebar菜单
 
-  getNavTwoKey( { commit }, key) { commit(types.NAVTWOKEY, key) }
+  getNavIndex( { commit }, index) { commit(types.NAVINDEX,index) }, // 获取主菜单index
+
+  getNavTwoIndex( { commit }, index) { commit(types.NAVTWOINDEX, index) } // 修改工作区菜单index
 
 
 }

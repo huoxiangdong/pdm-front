@@ -20,9 +20,9 @@ export const mutations = {
   [types.ISCOLLAPSE](state) {
     state.isCollapse = !state.isCollapse
   },
-  // SideBar菜单
-  [types.SIDEBARTITLE](state,titles) {
-     state.sidebartitle.push(titles)
+  // 获取SideBar index
+  [types.SIDEBARINDEX](state,index) {
+    state.sideBarIndex = index
   },
   // 打开添加工序
   [types.OPENADDLAYER](state) {
@@ -33,9 +33,9 @@ export const mutations = {
     //console.log(index)
     state.navIndex = index
   },
-  // 获取navtwo key
-  [types.NAVTWOKEY](state,key) {
-    state.navTwoKey = key
+  // 获取navtwo index
+  [types.NAVTWOINDEX](state,index) {
+    state.navTwoIndex = index
   }
 }
 

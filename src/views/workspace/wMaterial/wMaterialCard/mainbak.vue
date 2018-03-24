@@ -84,7 +84,7 @@ export default {
     } */
   },
   methods: {
-    ...mapActions(["getNavTwoKey"])
+    ...mapActions(["getNavTwoIndex"])
   },
   watch: {
     navTwoKey: function(val, oldVal) {
@@ -92,7 +92,7 @@ export default {
       // 重置菜单点击状态
       var state = function() {
         setTimeout(function() {
-          self.getNavTwoKey(~~0);
+          self.getNavTwoIndex(~~0);
         }, 1000);
       };
       // 获取提交内容

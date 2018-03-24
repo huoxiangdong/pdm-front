@@ -11,8 +11,8 @@ const state = {
   isCollapse: true,
   isOpenAddLayer: false,
   navIndex:'',
-  sideBarTitle: ['fuck','good'],
-  navTwoKey: ''
+  sideBarIndex: '',
+  navTwoIndex: ''
 
 }
 

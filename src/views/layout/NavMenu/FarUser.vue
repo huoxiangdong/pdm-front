@@ -1,6 +1,6 @@
 <template lang="pug">
   el-menu-item(
-    index
+    index="0"
     :style="{float: 'right'}")
       //  如果用户不存在，跳到登录
       router-link(v-show="!user.name" to="/auth/login") 登录

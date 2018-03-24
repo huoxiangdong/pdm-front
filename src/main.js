@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store/index'
+
 // 全局组件
 import './views'
 //  iviews
@@ -41,7 +42,4 @@ var v = new Vue({
   //template: '<App/>'
 })
 
-/* import Rest from './middleware/rest/plugin'
-Rest.install()
-v.$rest = Rest */
-//console.log( toArray) 
+

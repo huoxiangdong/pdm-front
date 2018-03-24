@@ -9,8 +9,9 @@
       NavMenu(菜单)
     // 中
     el-container
-      el-aside(style="width:70px;transition: width 0s;")
-        side-bar(v-on:setActiveItem="setActiveItem")
+      el-aside(style="width:auto;transition: width 0s;")
+        side-bar
+        //side-bar(v-on:setActiveItem="setActiveItem")
       el-main
         //w-navone
         w-navtwo
@@ -37,7 +38,7 @@ export default {
     ...mapState(["isCollapse"])
   },
   methods: {
-    setActiveItem(index) {
+   /*  setActiveItem(index) {
      // console.log(index)
       switch(parseInt(index)) {
         case 0:
@@ -53,11 +54,11 @@ export default {
       //console.log(this.$refs.carousel.$refs.carousel.setActiveItem);
       
       //this.$refs.carousel.next()
-    }
+    } */
   },
   mounted() {},
   watch: {
-    isCollapse: function() {
+  /*   isCollapse: function() {
       let el_main = document.getElementsByClassName("el-main");
       let el_aside = document.getElementsByClassName("el-aside");
       //let el_main_w = el_main.width
@@ -66,7 +67,7 @@ export default {
       } else {
         el_aside[0].style.width = "200px";
       }
-    }
+    } */
   }
 
   /*   directives: {

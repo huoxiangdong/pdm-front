@@ -16,11 +16,11 @@
     el-menu-item(index="4") 
         i(class="iconfont icon-sousuo-tianchong")   
     el-menu-item(index="5") 
-        i(class="iconfont icon-zuo")
-    el-menu-item(index="6") 
-        i(class="iconfont icon-you")
-    el-menu-item(index="7") 
         i(class="iconfont icon-shanchu")
+    el-menu-item(index="6") 
+        i(class="iconfont icon-zuo")
+    el-menu-item(index="7") 
+        i(class="iconfont icon-you")
     el-menu-item(index="8") 
         i(class="iconfont icon-msnui-info")
 </template>
@@ -36,15 +36,15 @@ export default {
     };
   },
   computed: {
-      ...mapState(['navTwoKey']),
+      ...mapState(['navTwoIndex']),
      /*  key: function() {
           return Array.from({length:10}).map(function(item,index){return index})
       } */
   },
   methods: {
-    ...mapActions(['getNavTwoKey']),
+    ...mapActions(['getNavTwoIndex']),
     selectHandle(key, keyPath) {
-      this.getNavTwoKey(~~key)
+      this.getNavTwoIndex(~~key)
       //console.log(this.navTwoKey);
     }
   }

@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
   export default {
     data() {
       return {
@@ -93,7 +94,18 @@
           zip: 200333
         }]
       }
-    }
+    },
+    computed: {
+      ...mapState(['navTwoKey'])
+    },
+   /*  watch: {
+      navTwoKey:function(val,oldVal) {
+       
+        if(val===1) {
+          console.log(this)
+        }
+      }
+    } */
   }
 </script>
 

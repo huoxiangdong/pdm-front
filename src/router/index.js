@@ -56,10 +56,20 @@ requireAuth: true, // 添加该字段表示该路由需要登录
       component: resolve =>
         import ('@/views/workspace/w-draw').then(resolve)
     }, {
+      name: 'MaterialBill',
+      path: 'MaterialBill',
+      component: resolve =>
+        import ('@/views/workspace/wMaterial/wMaterialBill').then(resolve)
+    },{
       name: 'material',
       path: 'material',
       component: resolve =>
         import ('@/views/workspace/wMaterial/wMaterial').then(resolve)
+    },{
+      name: 'ProcessCard',
+      path: 'ProcessCard',
+      component: resolve =>
+        import ('@/views/workspace/wMaterial/wProcessCard').then(resolve)
     }]
 
   }]
@@ -93,8 +103,8 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   //console.log(to.path.match(/.*\/index?$/i))
   //console.log(to.fullPath)
-
-  if (to.path.match(/.*\/index$/i)) { // . ->匹配任意字符 \/ ->转义 * ->全匹配 ? ->匹配字符串 $ ->结尾
+  // to.path.match(/.*\/index$/i)
+  if (to.path.match(/0|.*\/index$/i)) { // . ->匹配任意字符 \/ ->转义 * ->全匹配 ? ->匹配字符串 $ ->结尾
     next(false)
   } else if (to.meta.requireAuth) { // 如果访问的路由设置了 meta.requireAuth
     let token = localStorage.getItem('token')

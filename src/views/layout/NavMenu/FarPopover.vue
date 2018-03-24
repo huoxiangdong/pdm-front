@@ -1,6 +1,8 @@
 <template lang="pug">
 el-menu-item(
-  index
+  index="0"
+  @select="handleSelect"
+  
   :style="{float: 'right'}" 
   v-popover:popover2="" id="popover")
   i(class="iconfont icon-xiaoxitongzhi" ) 
@@ -18,7 +20,14 @@ el-menu-item(
 </template>
 
 <script>
-export default {};
+export default {
+   methods: {
+      handleSelect(key, keyPath) {
+        return false
+        console.log(key, keyPath);
+      }
+    }
+};
 </script>
 
 <style lang="stylus">

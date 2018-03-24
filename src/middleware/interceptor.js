@@ -2,22 +2,21 @@
 import axios from 'axios'
 import router from '@/router'
 
-// 超时
-axios.default.timeout = 5000
-// 请求头
-axios.defaults.headers.post['Content-Type'] = 'application/json'
+axios.default.timeout = 5000 //设置超时时间
+axios.defaults.headers.post['Content-Type'] = 'application/json' // 设置请求头
+//axios.defaults.baseURL = 'http://localhost:4000/api/v1/'; //这是调用数据接口
 
-// axios拦截请求
+// http request 拦截器（所有发送的请求都要从这儿过一次），通过这个，我们就可以把token传到后台，我这里是使用localStorage来存储token等权限信息和用户信息，若要使用cookie可以自己封装一个函数并import便可使用
 axios.interceptors.request.use(
   config => {
     //console.log(config)
     // 判断localStorage是否存在token，如果存在的话，则每个http header都加上token
-    
-    if (localStorage.getItem('token')) {
-      config.headers.Authorization = `token ${localStorage.getItem('token')}`
-        .replace(/(^")|("$)/g, '')
+
+    const token = localStorage.getItem("token"); //获取存储在本地的token
+    if (token) {
+      config.headers.Authorization = `token ${ token }`.replace(/(^")|("$)/g, '') // //携带权限参数
     } else {
-      console.log(localStorage.getItem('token'))
+      //console.log(token)
       router.replace({
         path: '/auth/login',
         query: {
@@ -31,11 +30,10 @@ axios.interceptors.request.use(
     return Promise.reject(err)
   })
 
-// axios拦截响应
- axios.interceptors.response.use(response => {
-  //response.config.url.match(/^\/api\/(register|login|token).*/g)
-   
-  if(response.config.url.match(/^\/api\/(register|login|token).*/g)) {
+// http response 拦截器（所有接收到的请求都要从这儿过一次）
+ axios.interceptors.response.use(
+   response => {
+  if(response.config.url.match(/^\/api\/(register|login|token).*/g)) { //response.config.url.match(/^\/api\/(register|login|token).*/g)
     if (!response.data.token) { // 后端的checkLogin返回的json数据作为跳转依据
        router.replace({
         path: 'login',
