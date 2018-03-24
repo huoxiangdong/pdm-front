@@ -7,8 +7,9 @@
      router
      id="sidebar"
      :collapse="collapse" 
-     @select="getIndex") 
+     @select="handleSelect") 
      el-menu-item(
+      :id="index"
       :index="item.index"
       v-for="(item,index) in items" 
       :key="item.id")
@@ -26,30 +27,53 @@ export default {
      }
   },
   computed: { // 动态的数据要放在computed内
-    ...mapState(['navIndex','sideBarIndex']),
-    collapse(){ return this.$store.state.isCollapse },
+    ...mapState(['navIndex','sideBarIndex','isCollapse']),
+    collapse(){ 
+      let  { isCollapse } = this
+      let _isCollapse = localStorage.getItem("isCollapse") 
+      return  !_isCollapse || isCollapse 
+      // || this.$store.state.isCollapse 
+      },
     items:function(){
+      // state localStrage都要获取
       let  { navIndex:index } = this
-        if(index == 'index') {
-           return Data.default
-        }else if(index == '/workspace/design') {
-          return Data.designTitle
-
-        }else if(index == '/workspace/MaterialBill') {
-          return Data.materialTitle
-        }else {
-          return Data.default
-        }
+      let navIndex = localStorage.getItem("navIndex")
+      if (navIndex == 0) {
+         return Data.default
+      }else if(navIndex == 1) {
+        return Data.designTitle
+      }else if(navIndex == 2) {
+        return  Data.materialTitle
+      }
     }
   },
   methods: {
     ...mapActions(['getSideBarIndex']),
-      getIndex(index,indexPath) {
-          this.getSideBarIndex(index)
-          console.log(this.sideBarIndex)
+      handleSelect(index,indexPath,event) {
+          let id = event.$attrs['id']
+          this.getSideBarIndex(id)
+          console.log(id)
           //this.$emit('setActiveItem',index)
       }
     },
+    /* beforeCreate() {
+       let navIndex = localStorage.getItem("navIndex")
+        if(navIndex == 2) {
+         this.index = Data.materialTitle
+       } 
+        switch (navIndex) {
+        case 0:
+         console.log(navIndex)
+         this.items = Data.default
+          break;
+        case 1: 
+          this.items = Data.designTitle
+          break;
+        case 2: 
+         this.items = Data.materialTitle
+          break;
+      } 
+    } */
 }
 </script>
 

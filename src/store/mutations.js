@@ -18,6 +18,7 @@ export const mutations = {
   },
   // SideBar折叠
   [types.ISCOLLAPSE](state) {
+    localStorage.setItem('isCollapse', !state.isCollapse)
     state.isCollapse = !state.isCollapse
   },
   // 获取SideBar index
@@ -31,6 +32,7 @@ export const mutations = {
   // 获取主菜单index
   [types.NAVINDEX](state,index) {
     //console.log(index)
+    localStorage.setItem('navIndex',index)
     state.navIndex = index
   },
   // 获取navtwo index

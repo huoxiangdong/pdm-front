@@ -4,28 +4,28 @@ export default {
   //test: ['fuck','fuck'],
   designTitle: [{
       title: "BOM",
-      index: "/workspace/design"
+      index: "/WorkSpace/Design"
     },
     {
       title: "电缆设计",
-      index: "/workspace/design"
+      index: "/WorkSpace/Design"
     }
   ],
   materialTitle: [{
     title: "基础物料",
-    index: "/workspace/material"
+    index: "/WorkSpace/Material"
   },
   {
     title: "工艺卡",
-    index: "/workspace/ProcessCard"
+    index: "/WorkSpace/ProcessCard"
   },],
   default: [{
-      title: "BOM",
+      title: "BOM``",
       index: "index"
     },
     {
       title: "电缆设计",
-      index: "/workspace/design"
+      index: "/WorkSpace/Design"
     }
   ]
 }

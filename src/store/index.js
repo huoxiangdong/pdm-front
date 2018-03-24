@@ -8,7 +8,7 @@ Vue.use(Vuex)
 const state = {
   token: null,
   username: '',
-  isCollapse: true,
+  isCollapse: false,
   isOpenAddLayer: false,
   navIndex:'',
   sideBarIndex: '',

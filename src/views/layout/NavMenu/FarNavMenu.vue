@@ -4,20 +4,17 @@
     router
     class="el-menu-demo" 
     mode="horizontal"
-    @select="handleSelect")
+    @select="handleSelect"
+    
+    )
     // 1 @click.native="isCollapse=!isCollapse" 点击事件，控制sidebar
     el-menu-item(
+      :id="index"
       :index="item.index"
       v-for="(item,index) in items" 
-      :key="item.id")
+      :key="index")
       template(slot="title") {{ item.title }}
-    //el-menu-item(index="/workspace/design")
-      template(slot="title") 产品设计
-    //el-menu-item(index="/workspace/material")
-      template(slot="title") 物料管理
-    // 4 个人中心
     far-user
-    // 消息
     Popover
       
 </template>
@@ -40,11 +37,11 @@ export default {
         },
         { 
           title: "产品管理", 
-          index: "/workspace/design" 
+          index: "/WorkSpace/Design" 
           },
         { 
           title: "物料管理", 
-          index: "/workspace/MaterialBill" 
+          index: "/WorkSpace/MaterialBill" 
           }
       ]
     };
@@ -57,12 +54,19 @@ export default {
       "isCollapse", // sidebar激活状态
       "getNavIndex"
     ]),
-    handleSelect(key, keyPath) {
-      this.getNavIndex(key)
-      console.log(key)
-      if(key === 'index') {
+    handleSelect(key, keyPath,event) {
+      let id = event.$attrs['id']
+      this.getNavIndex(id)
+      console.log(id)
+      if(id === 0) {
            this.isCollapse()
-      }
+      }/* else if(id == "popover") {
+        console.log(event)
+        event.handleClick = function() {
+          return false
+        }
+         //return false
+      } */
     }
   }
 };

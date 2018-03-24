@@ -180,7 +180,7 @@ export default {
   },
   watch: {
     // 观察菜单状态
-    navTwoKey: function(val, oldVal) {
+    navTwoIndex: function(val, oldVal) {
       switch (val) {
         case 1:
           console.log("renderInputs");

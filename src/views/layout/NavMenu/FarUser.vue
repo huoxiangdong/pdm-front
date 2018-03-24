@@ -1,6 +1,7 @@
 <template lang="pug">
-  el-menu-item(
-    index="0"
+  el-menu(
+    id="user"
+    index
     :style="{float: 'right'}")
       //  如果用户不存在，跳到登录
       router-link(v-show="!user.name" to="/auth/login") 登录
@@ -62,18 +63,26 @@ export default {
         })
         .catch(err => { this.$message.error(`${err.message}`, "ERROR!"); }); //console.log(err);
     }
+    
+  },
+  mounted() {
+   // console.log(this)
   }
 }
 </script>
 
-<style lang="stylus">
-
+<style lang="stylus" scoped>
+#user 
+  padding-top: 21px
+  padding-left: 10px 
+  padding-right: 10px
+  border-right: solid 0px #e6e6e6; 
 // 用户头像
 .el-dropdown > span > img 
   width: 20px
   height: 20px
   margin-bottom: 6px;
-.el-dropdown-menu__item
+/* .el-dropdown-menu__item
   color: #000
-  font-size:10px
+  font-size:10px */
 </style>
