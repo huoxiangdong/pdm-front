@@ -88,10 +88,19 @@ requireAuth: true, // 添加该字段表示该路由需要登录
   }]
 }, ]
 
+/* const scrollBehavior = (to, from, savedPosition) => {
+  console.log('to', to)
+  if (to.hash) {
+    return {
+      selector: to.hash
+    }
+  }
+} */
 
 // 实例路由
 const router = new Router({
   mode: 'history',
+  //scrollBehavior,
   routes // 传入路由配置
 })
 
@@ -126,5 +135,8 @@ router.beforeEach((to, from, next) => {
   }
 
 })
+
+
+
 // 导出路由
 export default router

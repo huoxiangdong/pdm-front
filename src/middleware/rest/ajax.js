@@ -1,7 +1,7 @@
 /* request helper */
 
 import axios from 'axios'
-
+//import qs from 'qs'
 /* 创建ajax类 */
 /* 类的创建
 class name {

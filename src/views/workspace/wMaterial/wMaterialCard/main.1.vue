@@ -1,22 +1,15 @@
 <template lang="pug">
-// :model="observerValue" 
-div
-  el-card(class="box-card" :body-style="bodyStyle" v-for="(value, key, index) in renderInputs" :key="value.id" v-bind="getInputs(key)")
+  // :model="observerValue" 
+  el-card(class="box-card" :body-style="bodyStyle" )
    div(slot="header")
-      span(style="font-size:13px;font-weight:bolder;") {{ key }}   
+      span(style="font-size:13px;font-weight:bolder;") {{ cardHeaderTitle }}
+      
    el-form(class="el-from" )
     div(:style="inputGrid")
-      el-input(
-        v-for="val in value" 
-        v-model="val.value" :key="val.id"
-        size="small"
-        v-if="val['isInput']")
-        template(slot="prepend") {{ val['title'] }}
-      component(v-else :is="val.component") 
       //el-form-item( v-for="(value, key, index) in baseData" :key="index" v-bind="getInputIndex(index)")
          el-input(v-model="value['value']" )
             template(slot="prepend") {{ value['title'] }}
-      //el-form-item( v-for="(value, key, index) in renderInputs" :key="value.id" v-bind="getInputs(value)")   
+      el-form-item( v-for="(value, key, index) in renderInputs" :key="value.id" v-bind="getInputs(value)")   
          el-input(
            v-model="baseData[key].value" 
            size="small"
@@ -44,7 +37,7 @@ export default {
     },
     cardHeaderTitle: { // 卡片标题
       type: String,
-      //required: true
+      required: true
     },
     inputGrid: Object, // 布局
     initInputData: Object,  // 初始化默认 新增
@@ -105,42 +98,24 @@ export default {
       //for(let item in baseData) {
        // console.log(this.baseData)
       //}
-      /* let renderInputs = {}
-     for(let item in this.baseData) {
-           this.baseData[item].map(data => {
-            let mix = schema && schema[data.key] || {} ;
-            const item = Object.assign({}, data,mix);
-            renderInputs = item
-           })
-         } */
-        
-     /*  let renderInputs = obj.map((data,index) => {
-        console.log("自定义组件");
-      console.log(data.key)
+      
+      let renderInputs = Object.values(baseData).map((data,index) => {
+       /*  console.log("自定义组件");
+        console.log(schema[data.key],data); */
         // 自定义input融入
-        
+        let mix = schema && schema[data.key] || {} ;
         //console.log("自定义");
         //console.log(mix) 
-        const item = Object.assign({}, data,mix);
+        const item = Object.assign({}, data, mix);
         //return item
           //console.log("融合的对象")
           //console.log(item) 
         
       
         return item;
-      }); */
-     let renderInputs = {}
-     Object.keys(baseData).map(title => {
-        let item = baseData[title].map(obj => {
-             let mix = schema && schema[obj.key] || {} 
-             //obj = Object.assign(obj ,mix);
-             obj = {...obj,...mix}
-             return obj
-           })
-           console.log(item)
-           baseData[title] = item
-         })
-      return baseData;
+      });
+
+      return renderInputs;
     }
   },
   methods: {
@@ -222,13 +197,6 @@ export default {
     navTwoIndex: function(val, oldVal) {
       switch (val) {
         case 1:
-       
-         /* Object.keys(this.baseData).map(data => {
-           obj[data] = val
-         }) */
-         
-         console.log(this.baseData)
-         //console.log(this.baseData)
           /*  console.log("zheli ")
           console.log(this.baseData); */
          /* console.log("zheli ")

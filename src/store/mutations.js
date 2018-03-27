@@ -38,6 +38,11 @@ export const mutations = {
   // 获取navtwo index
   [types.NAVTWOINDEX](state,index) {
     state.navTwoIndex = index
+  },
+  // 获取基础物料提交数据
+  [types.OBSERVERVALUES](state,value) {
+    console.log(value)
+    state.observerValues = value
   }
 }
 
