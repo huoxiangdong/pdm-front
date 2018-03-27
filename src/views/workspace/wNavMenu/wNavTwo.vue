@@ -51,9 +51,16 @@ export default {
 };
 </script>
  
-<style lang="stylus">
-#search {
+<style lang="stylus" scoped>
+/* #search {
   padding: 0px;
-}
+} */
+.el-menu--horizontal > .el-menu-item 
+    float: left;
+    height: 38px;
+    line-height: 38px;
+    margin: 0;
+    border-bottom: 2px solid transparent;
+    color: #909399;
 
 </style>

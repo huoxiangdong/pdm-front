@@ -1,7 +1,7 @@
 <template lang="pug">   
   // tabindex="0"
   el-carousel(
-    height='600px!important'
+    height='720px!important'
     indicator-position="outside" 
     arrow="never" 
     :autoplay="false"

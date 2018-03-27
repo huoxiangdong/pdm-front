@@ -4,7 +4,8 @@ export default {
     return {
       // 自定义input
       inputSchema: {
-        'MaterialNumber': {
+        'MatNumber': {
+          key:"MatNumber",
           isInput: true,
           component: Vue.extend({
             //props: ['address'],

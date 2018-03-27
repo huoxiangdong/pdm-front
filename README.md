@@ -1,7 +1,7 @@
 # front
 
 
-### bug
+### Bug 记录
 > 组件style必须设置scoped，负责会污染全局style
 
 > A Vue.js project

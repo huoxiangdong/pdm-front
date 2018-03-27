@@ -16,9 +16,9 @@ const actions = {
 
   getNavIndex( { commit }, index) { commit(types.NAVINDEX,index) }, // 获取主菜单index
 
-  getNavTwoIndex( { commit }, index) { commit(types.NAVTWOINDEX, index) } // 修改工作区菜单index
+  getNavTwoIndex( { commit }, index) { commit(types.NAVTWOINDEX, index) }, // 修改工作区菜单index
 
-
+  getObserverValues( { commit }, value) { commit(types.OBSERVERVALUES, value) }
 }
 
 export default actions

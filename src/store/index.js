@@ -12,8 +12,8 @@ const state = {
   isOpenAddLayer: false,
   navIndex:'',
   sideBarIndex: '',
-  navTwoIndex: ''
-
+  navTwoIndex: '',
+  observerValues:'' // 基础物料提交数据
 }
 
 export default new Vuex.Store({
