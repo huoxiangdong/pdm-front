@@ -4,7 +4,7 @@ export default {
           {
               key:'MatNumber',
               title:'物料编号',
-              value:'2',
+              value:'112',
               isInput:true
           },
           {
