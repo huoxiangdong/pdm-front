@@ -9,20 +9,19 @@
         // prop 传入 Form 组件的 model 中的字段
         el-form-item(label="请输入账号" prop="name")
           el-input(
-            size="medium"
+             size='small'
             v-model="formRegister.name" 
             )
-        
         el-form-item(label="请输入密码" prop="password" size="medium")
           el-input(
+             size='small'
             type="password" 
             v-model="formRegister.password")
-      
         el-form-item(label="请确认密码" prop="checkPassword")
           el-input(
+            size='small'
             type="password" 
             v-model="formRegister.checkPassword")
-       
         el-form-item
         el-form-item
           el-button(type="success" size="medium" @click="addUser") 立即注册
@@ -97,11 +96,13 @@
           if (valid) {
             this.$rest.submit.register(formData) // 提交
               .then(res => {
+                console.log('注册返回的结果')
+                console.log(res)
                 if (!res.success) {
                   this.$message.error(res.message)
                 } else {
                   this.$message.success(res.message)
-                  this.$router.push('/auth/login')
+                  this.$router.push('/auth/login') // 路由跳转
                 }
               })
               .catch(err => {

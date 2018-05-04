@@ -149,7 +149,7 @@ class ajax {
         // @param: axios.post(url, data, config)
         return this.$http.post(baseUrl + url, data, config).then((res) => {// // 最终执行的方法
           console.log(baseUrl + url)
-          console.log(`POST请求拦截响应:\n` + JSON.stringify(res.data,null,2))
+          console.log(`POST响应:\n` + JSON.stringify(res.data,null,2))
           return res.data
         }, (res) => {
           return res

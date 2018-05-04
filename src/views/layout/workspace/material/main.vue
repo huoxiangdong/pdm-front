@@ -4,14 +4,14 @@
     v-bind="getData(value)"
     :cardNum="getCardNum(index)"
     :cardHeaderTitle="key"
-    :inputSchema="inputSchema"
+    
 x-card(
         :baseData="materialData"
         :initInputData="initInputData"
-        
+        :inputSchema="inputSchema"
         :inputGrid=`{ 
           display: "grid",
-          "grid-template-columns": "1fr 1fr 1fr", 
+          "grid-template-columns": "1fr 1fr", 
           "grid-row-gap": "1rem",
           "grid-column-gap": "2rem" }`)
   

@@ -1,7 +1,7 @@
 <template lang="pug">
 // :model="observerValue" 
 div
-  el-card(:style="cardStyle" :body-style="bodyStyle" v-for="(item, key, index) in renderInputs" :key="item.id" v-bind="getInputs(key)")
+  el-card(:style="cardStyle" :body-style="bodyStyle" v-for="(item, key, index) in renderInputs" :key="item.id" )
    div(slot="header")
       span {{ key }}   
    el-form(class="el-from")
@@ -13,7 +13,7 @@ div
         size="small"
         v-if="obj['isInput']")
         template(slot="prepend") {{ obj['title'] }}
-      component(v-else :is="val.component") 
+      component(v-else :is="obj.component" v-bind="getValbind(obj)" @bindVal="obj.value = arguments[0]") 
       //el-form-item( v-for="(value, key, index) in baseData" :key="index" v-bind="getInputIndex(index)")
          el-input(v-model="value['value']" )
             template(slot="prepend") {{ value['title'] }}
@@ -169,13 +169,16 @@ export default {
      let renderInputs = {}
      Object.keys(baseData).map(title => {
         let item = baseData[title].map(obj => {
-             let mix = schema && schema[obj.key] || {} 
+          // schema[obj.key]关键是这个条件判断，只有schema的key===obj.key才会返回
+             let mix = schema && schema[obj.title] || {} 
+            //  console.log("融合")
+            //  console.log(obj,mix)
              //obj = Object.assign(obj ,mix);
              obj = {...obj,...mix}
              return obj
            })
-           console.log('这里')
-           console.log(item)
+          //  console.log('这里')
+          //  console.log(item)
            baseData[title] = item
          })
       return baseData;
@@ -189,6 +192,7 @@ export default {
         this.$rest.submit
           .addMaterialData(this.observerValue)
           .then(res => {
+
             if (!res.success) {
               console.log(JSON.stringify(res, null, 2));
               const h = this.$createElement;
@@ -200,8 +204,13 @@ export default {
                   h("p", { style: "margin-top:3px" }, res.data.errors[0].validatorKey)
                 ])
               });
-            }else { this.$message.success(res.message) }
-          }).catch(err => { this.$message.error(`${err.message}`) }); // 提交请求响应过程
+              
+              return false
+            }else { 
+              this.$message.success(res.message) }
+          }).catch(err => { 
+            
+            this.$message.error(`${err.message}`) }); // 提交请求响应过程
       }else {
         this.$message.error("你真厉害，被你发现了😝");
         return false; }
@@ -289,9 +298,10 @@ export default {
       this.getMultiMenuState(~~0);
       //console.log("new: %s, old: %s", val, oldVal);
     },
-    getInputs(value) {
-      /* console.log("renderInputs是");
-      console.log(value); */
+   getValbind({value,title}) { // 像自定义组件传值
+     const props  = { value,title }
+     const handler = obj.propsHandler
+     return handler && handler(props) || props
     },
     getBaseData() {
       console.log("获取到基础数据");
