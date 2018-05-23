@@ -42,4 +42,4 @@ let app = new Vue({
   //template: '<App/>'
 })
 
-console.log(app)
+

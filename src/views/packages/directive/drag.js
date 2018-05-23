@@ -1,53 +1,63 @@
 export default {
   inserted(el,binding,vnode) {
-
+   
     let isDown = !1,
-    offsetX,
-    offsetY,
-    eOffsetX,
-    eOffsetY,
-    left = el.getBoundingClientRect().left, // 移动e.page的距离,多出的部分(e.page = 元素位置+left)
-    top = el.getBoundingClientRect().top
-    console.log('inserted')
-    console.log(el.getBoundingClientRect())
+        leftX,
+        leftY,
+        rightX,
+        rightY,
+        borderRight,
+        borderBottom,
+        // 移动e.page的距离,多出的部分(e.page = 元素位置+left)
+        // 这里是元素初始的位置
+        initElLeft = el.getBoundingClientRect().left, 
+        initElTop = el.getBoundingClientRect().top,
+        parent = Object.values(binding.value)[0],
+        parentRect = parent.getBoundingClientRect(),
+        moveElRect
+        
+   
+    
 function down(e) {
-//  console.log(el.getBoundingClientRect())
-//  console.log(e)
   
   isDown = 1
-  // 鼠标与元素的距离 e.offsetX/Y
-  offsetX = e.pageX - el.getBoundingClientRect().left
-  offsetY = e.pageY - el.getBoundingClientRect().top
+ let  downElRect = el.getBoundingClientRect()
+  // 鼠标与元素左上角的距离 e.offsetX/Y
+   leftX = e.pageX - downElRect.left // -元素移动后的位置
+   leftY = e.pageY - downElRect.top
+  // 鼠标与元素右下角的距离 
+   rightX = downElRect.right - leftX 
+   rightY = downElRect.bottom - leftY
+  // 移动边界
+   let borderWidth = parseInt(getComputedStyle(parent,null)['borderWidth'])
+   borderRight = parentRect.width - downElRect.width - borderWidth//右
+   borderBottom = parentRect.height - downElRect.height - borderWidth // 下
 
-  // offsetX = e.offsetX + el.offsetLeft//e.offsetX //e.pageX - left
-  // offsetY = e.offsetY + el.offsetTop//e.offsetY //e.pageY - top
-  // console.log(e)
-  // console.log(el.offsetLeft +','+ left +',' + top)
-  // console.log('state'+ state)
-  // if (e.target != el) {
-  //   offsetX = e.offsetX + e.target.offsetLeft + el.offsetLeft
-  //   offsetY = e.offsetY + e.target.offsetTop + el.offsetTop
-  // } else {
-  //   offsetX = e.offsetX + el.offsetLeft, // 如果鼠标位置是在子元素上会有问题，因为获取的offseX是相对于其父元素的
-  //   offsetY = e.offsetY + el.offsetTop // 例如 margin默认值,要减去   
-  // }
-  // x = e.clientX; // pageX
-  // y = e.clientY;
-
+ console.log(parseInt(getComputedStyle(parent,null)['borderWidth']))
   if (binding.modifiers.cursor) el.style.cursor = "move"
   addEventListener("mousemove", move)
   addEventListener("mouseup", up)
 }
 
 function move(e) {
-  console.log(left+','+top)
   if (!isDown) return
-  el.style.transform = `translate3d(${e.pageX - left - offsetX }px,${e.pageY - top - offsetY }px,0)`
-  el.style.transition = '0s';
+  moveElRect = el.getBoundingClientRect()
+
+
+  let moveX = e.pageX - (initElLeft + leftX), // 元素X坐标 鼠标X轴与元素X轴的距离 ,(elLeft + leftX) 鼠标位置
+      moveY = e.pageY - (initElLeft + leftY),
+      // 边界判断
+      border = moveElRect.left >= parentRect.left &&
+               moveElRect.top >= parentRect.top &&  // 左上角
+               moveElRect.right <= parentRect.right &&
+               moveElRect.bottom <= parentRect.bottom ? true : false
   
-  //计算移动后的左偏移量和顶部的偏移量
-  // (x - l) 鼠标的位置-元素的位置= 鼠标相对于元素的位置(e.offsetX/Y)
-  
+  if (border ) {
+    //当移动位置在范围内时，元素跟随鼠标移动。
+    el.style.transform = `translate3d(${ (moveX < 0) ? 0 : (moveX >= borderRight ? borderRight : moveX) }px,
+                                      ${ (moveY < 0) ? 0 : (moveY >= borderBottom ? borderBottom : moveY) }px,0)`
+  }
+
 }
 
 function up() {
@@ -58,11 +68,12 @@ function up() {
 el.addEventListener("mousedown", down)
   },
   bind(el, binding, vnode) {
+    el.style.transition = '0s' // 清楚默认
+
     
-  
   },
   update() {
-   
+
   },
   unbind(el, binding) {}
 };

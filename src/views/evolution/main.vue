@@ -1,7 +1,7 @@
 <template lang="pug">
 div(class="main")
-  div(class="draw-container")  
-      div( class = "test" v-drag="") test
+  div(class="draw-container" ref="drawContainer")  
+    div( class = "test" v-drag="$refs") test
   div(class="options" ) 
     el-collapse(v-model="activeName" v-for="item in items" :key="item.name")
       el-collapse-item(class="collapse-item" :name="item.name" )
@@ -56,12 +56,9 @@ export default {
 
   
   },
-  watch:{
-    'multiMenuIndex.value': function(val,oldVal) {
-      console.log(val)
-      
-    }
-  }
+ mounted() {
+     console.log(this)
+ }
 
 }
 </script>
