@@ -1,6 +1,5 @@
 <template lang="pug">
-  div(class="app-auth flex flex-column flex-ai-center")
-    //Nest()
+  div()
     Logo
     router-view
     x-footer(:links="links")
@@ -46,7 +45,7 @@
       const l = document.getElementsByTagName('script')
       const canvasNest = document.getElementById('c_n' + l.length)
       if (canvasNest) {
-        canvasNest.remove()
+        canvasNest.remove() // ie11 不支持 remove
       }
       if (this.script) {
         this.script.remove()

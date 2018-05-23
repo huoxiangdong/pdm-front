@@ -1,9 +1,9 @@
 <template lang="pug">
-// 给定两个元素,布尔值判断显示
+// 给定两个元素,布尔值判断显示 readonly
 // this.$set(this.row, '_edit', !this.row._edit)
 el-input(
         type="text"
-        readonly
+        
         @blur="isReadOnly"
         @keyup.enter.native="isBlur"
         v-model="row[column.property]")
@@ -37,8 +37,9 @@ export default {
         console.log(event)
       },
       isReadOnly(event) { // 失去焦点后只读
-          event.target.readOnly = true
+          //event.target.readOnly = true
           console.log('失去焦点')
+          console.log(event.target.readOnly)
       },
 
  

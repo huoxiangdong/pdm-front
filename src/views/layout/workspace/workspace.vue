@@ -1,5 +1,4 @@
 <template lang="pug">   
-  // tabindex="0"
   el-carousel(
     height='720px!important'
     indicator-position="outside" 
@@ -7,71 +6,39 @@
     :autoplay="false"
     ref='carousel'
     )
+    el-carousel-item
+       router-view(style="padding:0 30px")
     el-carousel-item   
-       router-view
-       
-    //el-carousel-item
-      table
-    //el-carousel-item
-      wMainBomTable
-      
-    //el-carousel-item(name='draw')
-      wBomTable
-    //el-carousel-item
-      wBom
-      
-    //el-carousel-item
-      wFrom
-    //el-carousel-item
-      wNavMenu
-      wActiveArea
-    //el-carousel-item
-      wNavMenu
-      wDraw
-    //el-carousel-item
-      //wNavMenu
-      wDrawControl
-    
 </template>
 
 <script>
-/* import egridUse from '../workspace/wTable/w-egridUse.vue'
-import wAddLayer from '../workspace/wBom/w-addLayer.vue' */
-
+import { mapActions } from 'vuex'
 export default {
   name: "WorkSpace",
   data() {
     return {}
   },
 methods: {
-    /* setActiveItem(index) {
-        console.log(this.$refs)
-        this.$refs.carousel.setActiveItem(index);
-        //this.$refs.carousel.next()
-      } */
+    ...mapActions(['getCarScroll']),
+
+    // carScroll(event){
+    //  this.getCarScroll(event.target.scrollTop)
+
+    // }
  }, 
-  /* components: {
-    egridUse: egridUse,
-    wAddLayer: wAddLayer
-  } */
+
 }
 </script>
 
 <style lang="stylus" scoped>
- // 走马灯 
-  /*  .el-carousel__item h3 
-     color: #475669
-     font-size: 18px
-     opacity: 0.75
-     line-height: 300px
-     margin: 0 */
-// 卡片背景颜色
-  .el-carousel__item:nth-child(2n) 
-      background-color: #fff     
-  .el-carousel__item:nth-child(2n+1) 
+.el-carousel 
+  // 卡片背景颜色
+  &__item:nth-child(2n)  // 其父元素的第二个子元素 n 是计数器（从 0 开始）   
+  &__item:nth-child(2n+1) 
       background-color:#fff 
-  // 工作去卡片多的话使其滚动
-  .el-carousel__item.is-active 
-    overflow-y: auto
-    overflow-x: hidden
+
+  // div
+  //  overflow-y auto
+  //  overflow-x hidden
+  
 </style>

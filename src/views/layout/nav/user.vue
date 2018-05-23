@@ -8,19 +8,19 @@
       // 个人中心
       el-dropdown(@command="loginOut" placement='bottom-end')
         span(v-show="user.name" v-text="user.name") 
-        i(style="float: right; margin:2px 5px;" class="iconfont icon-tianjia1")
+        //i(style="float: right; margin:2px 5px;" class="iconfont icon-tianjia1")
         //i(class="el-icon-caret-bottom el-icon--right")
         // 下拉菜单
         el-dropdown-menu(slot="dropdown")
           el-dropdown-item 
-            | <i class="iconfont icon-dengluzhanghao"></i>
-            |   个人中心
+            | <i class="iconfont icon-geren"></i>
+            | &nbsp;&nbsp;个人中心
           el-dropdown-item(style="border-bottom:1px solid #eee") 
             i(class="iconfont icon-shezhi" ) 
-            |   设置 
+            | &nbsp;&nbsp;&nbsp;设置 
           el-dropdown-item(command="out")
-            i(class="iconfont icon-tuichu") 
-            |   退出登录
+            i(class="iconfont icon-icon_logout") 
+            | &nbsp;&nbsp;&nbsp;退出登录
 </template>
 
 <script>
@@ -78,16 +78,18 @@ export default {
 
 <style lang="stylus" scoped>
 .el-menu 
-  padding-top: 21px
-  padding-left: 15px 
-  padding-right: 10px
-  border-right: solid 0px #e6e6e6; 
+  padding-top 21px
+  padding-left 25px 
+  padding-right 25px
+  border-right solid 0px #e6e6e6; 
 .el-dropdown-menu
-  border-radius: 0px
+  padding: 0 
+  border-radius 0px
 .el-dropdown-menu__item
-  font-size: 13px
-  color: #000
+  padding: 0 10px
+  font-size 13px
+  color #000
 .iconfont
-  font-size: 14px
-  color: #000
+  font-size 14px
+  color #000
 </style>

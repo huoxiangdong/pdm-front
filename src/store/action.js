@@ -17,11 +17,16 @@ const actions = {
 
   getMultiMenuState({ commit }, index) { 
 
-    commit(types.MULTIMENUINDEX, index) }, // multiMenu index
+    commit(types.MULTIMENUINDEX, index) 
+    
+  }, // multiMenu index
 
   getObserverValues({ commit }, value) { commit(types.OBSERVERVALUES, value) },
 
   isReadOnly({ commit }) { commit(types.ISREADONLY) }, // cell可编辑
+  getCarScroll({ commit },scrollTop)  { 
+    commit(types.CARSCROLL,scrollTop) 
+  }
 
 }
 

@@ -1,14 +1,22 @@
 let username = localStorage.getItem("username")
 export default {
-     data: [{}],
+     data: [{
+        Position:'ddd',
+        MatName:'ddd',
+        MatDesc:'ddd',
+        Diameter:'ddd',
+        Quantity:'ddd',
+        GroNumber:'ddd',
+        LossRate:'ddd'
+     }],
      columns: [
-        { label: '方向', prop: 'date'  },
-        { label: '物料', prop: 'name'},
-        { label: '描述', prop: 'province'},
-        { label: '直径', prop: 'city'},
-        { label: '数量', prop: 'address'},
-        { label: '组数', prop: 'zip' },
-        { label: '损耗率', prop: 'zip'}
+        { label: '方向', prop: 'Position' },
+        { label: '物料', prop: 'MatName'},
+        { label: '描述', prop: 'MatDesc'},
+        { label: '直径', prop: 'Diameter'},
+        { label: '数量', prop: 'Quantity'},
+        { label: '组数', prop: 'GroNumber' },
+        { label: '损耗率', prop: 'LossRate'},
       ],
       base: {
         '基本信息': [
@@ -23,13 +31,12 @@ export default {
               key:'MatName',
               title:'物料名称',
               value:'',
-         
               isInput:true
           },
           {
-            key:'MatName',
-            title:'创建人',
-            value: username,
+            key:'Creator',
+            title:'创建者',
+            value: username ,
             width:'50%',
             isInput:true
         }]

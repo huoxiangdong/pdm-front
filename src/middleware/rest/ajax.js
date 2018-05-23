@@ -119,12 +119,11 @@ class ajax {
   //  增
   //  参数: path-->路径 
   create(path, config1 = { cache: false }) {
+  
     // createMap={}
-
     if (!this.createMap[path]) { // cache path closure
       let url = ''
       this.createMap[path] = (data, expand, config2 = {}) => {
-        
         // data是登录提交的formData
         // 合并config Object.assign合并对象到一个新的{}
         // config1:{ cache: false } config2:{}

@@ -9,9 +9,12 @@
     el-menu-item(
       :id="index"
       :index="item.index"
+     
       v-for="(item,index) in items" 
       :key="index")
       template(slot="title") {{ item.title }}
+    //el-menu-item(style="float:right" index)
+      el-color-picker(v-model="color1" size='mini' )
     User
     Popover
       
@@ -21,6 +24,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import Data from './data'
+//import { navbars } from '@/config/navbar'
 export default {
    name: "NavMenu",
   data() {

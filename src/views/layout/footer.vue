@@ -2,7 +2,7 @@
   div(class="app-footer px-2")
    div(class="links text-center")
       a(v-for="(link,index) in links" :key="index" class="text-secondary" :class="{'mr-4': index!==links.length-1}" :href="link.href||link.link") {{link.text}}
-   div(class="copyright mt-1 text-secondary text-center") Copyright 2018 &copy; huoxiangdong@aliyun.com
+   div(class="copyright mt-1 text-secondary text-center") Copyright 2018 &copy; 蓝今软件
 
 </template>
 

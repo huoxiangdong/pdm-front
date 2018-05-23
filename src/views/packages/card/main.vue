@@ -1,7 +1,6 @@
 <template lang="pug">
-// :model="observerValue" 
 div
-  el-card(:style="cardStyle" :body-style="bodyStyle" v-for="(item, key, index) in renderInputs" :key="item.id" )
+  el-card(:id="key" class="card" :body-style="bodyStyle" v-for="(item, key, index) in renderInputs" :key="item.id")
    div(slot="header")
       span {{ key }}   
    el-form(class="el-from")
@@ -9,26 +8,17 @@ div
       el-input(    
         v-for="obj in item" 
         v-model="obj.value" :key="obj.id"
-        :style="{width:obj.width}"
+        :style="{ width: obj.width }"
         size="small"
         v-if="obj['isInput']")
         template(slot="prepend") {{ obj['title'] }}
       component(v-else :is="obj.component" v-bind="getValbind(obj)" @bindVal="obj.value = arguments[0]") 
-      //el-form-item( v-for="(value, key, index) in baseData" :key="index" v-bind="getInputIndex(index)")
-         el-input(v-model="value['value']" )
-            template(slot="prepend") {{ value['title'] }}
-      //el-form-item( v-for="(value, key, index) in renderInputs" :key="value.id" v-bind="getInputs(value)")   
-         el-input(
-           v-model="baseData[key].value" 
-           size="small"
-           v-if="value['isInput']") 
-           template(slot="prepend") {{ value['title'] }}
-         component(v-else :is="value.component")       
+     
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { stringify } from 'querystring';
+//import { stringify } from 'querystring';
 var obj = {}
 const INPUT_ITEM = { component: {} };
 
@@ -54,31 +44,30 @@ export default {
         "grid-row-gap": "10px", // 行距
         "grid-column-gap": "50px" // 列距
       }
-      }
+     }
     }, // 布局
-    cardStyle: {
-      type: [Object,String],
-      default() {
-        return {
-          margin: '10px 160px'
-        }
-      }
-
-    },
+    // cardStyle: {
+    //   type: [Object,String],
+    //   default() {
+    //     return {
+    //       margin: '10px auto'
+    //     }
+    //   }
+    // },
     initInputData: Object,  // 初始化默认 新增
     inputSchema:Object // 自定义模板
   },
 
   data() {
     return {
-      bodyStyle: { margin: "0px auto" },    
-      //headerStyle:{'background-color': '#999999','padding':'10px 20px'}
+      bodyStyle: { margin: "0px auto" },   
+      keyMap: new Set
     };
   },
   computed: {
     ...mapState(["multiMenuIndex"]),
-    // 获取input值
-    observerValue: {
+  
+    observerValue: {  // 获取input值
       get: function() {
        let obj = {}
         for(let item in this.baseData) {
@@ -86,31 +75,10 @@ export default {
                obj[data.key] = data.value         
              })   
         }
-  
-       /* Object.values(this.baseData).map((data,index) => {
-        
-          //console.log(Object.assign(obj,Object.values(this.baseData)[index]))
-            obj[data.key] = data.value;
-           // return Object.values(this.baseData)[index]
-          
-        }); */
-        
         return obj
       },
       set: function(val) {
         let obj = {};
-        // for (let key in val) {
-        //for(let i=0;i<this.baseData.length;i++) {
-        //console.log()
-        //this.baseData[i].value =  val[Object.keys(val)[i]]
-        //}
-        //this.baseData[i].value = val[key]
-        //this.baseData[key].value = val[key];
-        //}
-        /* Object.values(this.baseData).map((data, index) => {
-          data.value = val[Object.keys(val)[index]];
-        }); */
-        
         for(let item in this.baseData) {
              this.baseData[item].forEach(data => {
             
@@ -119,9 +87,7 @@ export default {
                }else{
                  console.log(val[data.key])
                  data.value = val[data.key]
-               }
-            
-                  
+               }     
              })   
         }
         console.log(
@@ -135,50 +101,16 @@ export default {
         obj[Object.keys(this.observerValue)[0]] = Object.values(this.observerValue)[0]
         return obj
     },
-    // input渲染
     renderInputs() {
-      let { baseData, inputSchema: schema } = this;
-      //console.log(this)
-      //for(let item in baseData) {
-       // console.log(this.baseData)
-      //}
-      /* let renderInputs = {}
-     for(let item in this.baseData) {
-           this.baseData[item].map(data => {
-            let mix = schema && schema[data.key] || {} ;
-            const item = Object.assign({}, data,mix);
-            renderInputs = item
-           })
-         } */
-        
-     /*  let renderInputs = obj.map((data,index) => {
-        console.log("自定义组件");
-      console.log(data.key)
-        // 自定义input融入
-        
-        //console.log("自定义");
-        //console.log(mix) 
-        const item = Object.assign({}, data,mix);
-        //return item
-          //console.log("融合的对象")
-          //console.log(item) 
-        
-      
-        return item;
-      }); */
+      let { baseData, inputSchema: schema } = this; //// input渲染
      let renderInputs = {}
      Object.keys(baseData).map(title => {
         let item = baseData[title].map(obj => {
-          // schema[obj.key]关键是这个条件判断，只有schema的key===obj.key才会返回
-             let mix = schema && schema[obj.title] || {} 
-            //  console.log("融合")
-            //  console.log(obj,mix)
-             //obj = Object.assign(obj ,mix);
+             let mix = schema && schema[obj.title] || {}  // schema[obj.key]关键是这个条件判断，只有schema的key===obj.key才会返回
+
              obj = {...obj,...mix}
              return obj
            })
-          //  console.log('这里')
-          //  console.log(item)
            baseData[title] = item
          })
       return baseData;
@@ -186,8 +118,8 @@ export default {
   },
   methods: {
     ...mapActions(["getMultiMenuState","getObserverValues"]),
-    // input数据保存提交
-    addMaterialData() {
+    
+    addMaterialData() { // input数据保存提交
       if (this.$rest) {
         this.$rest.submit
           .addMaterialData(this.observerValue)
@@ -296,10 +228,9 @@ export default {
     // 初始菜单状态
     initNavState(val, oldVal) {
       this.getMultiMenuState(~~0);
-      //console.log("new: %s, old: %s", val, oldVal);
     },
    getValbind({value,title}) { // 像自定义组件传值
-     const props  = { value,title }
+     const props  = { value,title } // 关键
      const handler = obj.propsHandler
      return handler && handler(props) || props
     },
@@ -311,47 +242,71 @@ export default {
         props[index] = val;
       });
       return props;
-    }
-  },
-  watch: {
-    // 观察菜单状态
-    multiMenuIndex: function(val, oldVal) {
-      console.log(this.baseData)
-      switch (val) {
-        case 'work1':
-       console.log(this.baseData)
-          console.log(
-            `当前input内数据:\n`,
-            JSON.stringify(this.observerValue, null, 2)
-          );
-          this.initNavState(val, oldVal);
-          break;
-        case 'work2': // 新增
-          this.observerValue = this.initInputData;
-          this.initNavState(val, oldVal);
-          break;
-        case 'work3': // 保存
-          this.addMaterialData();
-          this.initNavState(val, oldVal);
-          break;
-        case 'work4': // 查询
-          this.queryMaterialData();
-          this.initNavState(val, oldVal);
-          break;
-        case 'work5': // 更新
-          console.log('更新')
-          this.updateMaterialData();
-          this.initNavState(val, oldVal);
-          break;
-        case 'work6': 
-          this.deleteMaterialData()
-         
-          this.initNavState(val, oldVal);
-      }
     },
-    observerValue:function(val,oldVal) {
-    }
-  }
+    // getKey(key,index) {    
+    //   this.keyMap.add(key)
+    //   if (this.keyMap.size === 8){
+    //     this.$emit('cardTitle',Array.from(this.keyMap))
+    //   }
+      
+    // }
+  },
+  // watch: {
+  //   'multiMenuIndex.value': function(val, oldVal) {  // 观察菜单状态
+     
+  //     switch (val) {
+  //       case 'work1':
+  //         console.log(
+  //           `当前input内数据:\n`,
+  //           JSON.stringify(this.observerValue, null, 2)
+  //         );
+  //         this.initNavState(val, oldVal);
+  //         break;
+  //       case 'work2': // 新增
+  //         this.observerValue = this.initInputData;
+  //         this.initNavState(val, oldVal);
+  //         break;
+  //       case 'work3': // 保存
+  //         this.addMaterialData();
+  //         this.initNavState(val, oldVal);
+  //         break;
+  //       case 'work4': // 查询
+  //         this.queryMaterialData();
+  //         this.initNavState(val, oldVal);
+  //         break;
+  //       case 'work5': // 更新
+  //         console.log('更新')
+  //         this.updateMaterialData();
+  //         this.initNavState(val, oldVal);
+  //         break;
+  //       case 'work6': 
+  //         console.log(val)
+  //         this.deleteMaterialData()
+  //         this.initNavState(val, oldVal)
+  //         break
+  //       case 'work7': 
+  //         //this.$router.replace({path:this.$route.fullPath,hash:'基本信息'})
+  //         this.initNavState(val, oldVal)
+  //         break
+  //       case 'work8':
+  //         //this.$router.push({path:this.$route.fullPath,hash:'财务相关'})
+  //         // this.$router.push({path:this.$route.fullPath,hash:Array.from(this.keyMap)[this.keyIndex]})
+  //         // this.keyIndex --
+  //         console.log(Object.keys(this.baseData))
+  //         this.initNavState(val, oldVal)
+  //         break
+  //     }
+  //   },
+  //   observerValue:function(val,oldVal) {
+  //     const h = this.$createElement;
+
+  //       this.$notify({
+  //         title: '提交数据',
+  //         message: h('pre', { style: 'color: teal'}, JSON.stringify(this.observerValue, null, 4)),
+  //         duration: 1000
+  //       });
+  //   }
+  // }
 };
 </script>
 

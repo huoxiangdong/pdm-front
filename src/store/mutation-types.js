@@ -7,6 +7,7 @@ export const NAVINDEX = 'NAVINDEX' // 获取主菜单index
 export const MULTIMENUINDEX = 'MULTIMENUINDEX' // 获取multiMenu index
 export const OBSERVERVALUES = 'OBSERVERVALUES'
 export const ISREADONLY = 'ISREADONLY' // cell编辑
+export const CARSCROLL = 'CARSCROLL' // carousel滚动高度
 
 
 

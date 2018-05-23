@@ -1,5 +1,5 @@
 // 改变的数据
-import * as types from './mutation-types'
+import * as types from './mutation-types' // 引入所有为 types
 
 export const mutations = {
   [types.LOGIN](state, data) {  // 登录  
@@ -31,15 +31,19 @@ export const mutations = {
   },
   [types.MULTIMENUINDEX](state,index) { // 获取multiMenu index
     // type: icon0 text10 cell20 table30
-
-    state.multiMenuIndex = index
+    state.multiMenuIndex = {
+      value: index,
+      radom: Math.random() // 使 watch每次触发
+    }  
   },
   [types.OBSERVERVALUES](state,value) { // 获取基础物料提交数据
-    console.log(value)
     state.observerValues = value
   },
   [types.ISREADONLY](state) { // cell可编辑
     state.readonly = !state.readonly
+  },
+  [types.CARSCROLL](state,scrollTop) {
+    state.carScroll = scrollTop
   }
 }
 

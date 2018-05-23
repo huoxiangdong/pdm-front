@@ -15,6 +15,12 @@ body
 a, button, input, textarea
   text-decoration:none // 默认样式
   -webkit-tap-highlight-color rgba(0,0,0,0)
+a 
+  color #424242
+  font-weight lighter
+  &:active
+    color #ff5000
+
 /* p
   margin 0
   line-height 1.5 */
@@ -25,12 +31,18 @@ a, button, input, textarea
 .ivu-icon
   font-size 14px */
 
-/* 滚动条 */
-//::-webkit-scrollbar
-//  width 6px /*滚动条的宽度*/
-//  height 6px /*滚动条的高度*/
-/* ::-webkit-scrollbar-thumb
+/* 自定义滚动条 */
+::-webkit-scrollbar
+   width 5px /*滚动条的宽度*/
+   //height 6px /*滚动条的高度*/
+::-webkit-scrollbar-thumb // 轨道
   background-color #b8b8b8
-  border-radius 4px
+  border-radius 0px
   &:hover
-    background-color #999 */
+    background-color #999 
+
+
+//
+
+.card 
+  margin 10px auto

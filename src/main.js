@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store/index'
-
+import 'babel-polyfill'
 // 全局组件
 import './views'
 //  iviews
@@ -32,7 +32,7 @@ Vue.config.productionTip = false
 
 Vue.use(Element)
 /* eslint-disable no-new */
-var app = new Vue({
+let app = new Vue({
   el: '#app',
   router,
   store,
@@ -41,3 +41,5 @@ var app = new Vue({
   //components: { App },
   //template: '<App/>'
 })
+
+console.log(app)

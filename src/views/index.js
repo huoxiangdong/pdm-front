@@ -1,94 +1,7 @@
 /**** 全局组件注册 ***/
 import Vue from 'vue'
-// vue-3d-model
-//import { ModelObj } from 'vue-3d-model'
-// vue-grid-canvas
-//import Grid from 'vue-grid-canvas'
-// 粒子效果
-//import Nest from 'vue-atom-canvas'
-// 圆环菜单
-//import CircleMenu from 'vue-circle-menu'
-//Vue.component('CircleMenu', CircleMenu)
-
-//import Bom from './layout/workspace/bom/bom'
-
-// wTable
-//import wBomTable from './workspace/wTable/w-bomTable.vue'
-//import wMainBomTable from './workspace/wTable/w-mainBomTable.vue'
-
-//import xHeader from './workspace/wNavMenu/header.vue'
-
-//import wActiveArea from './workspace/w-activeArea.vue'
-//import wFrom from './workspace/w-from.vue'
-//import wTable from './workspace/w-table.vue'
-//import wDraw from './workspace/w-draw'
-
-
-
-
-// wDraw
-//import wDrawSpace from './workspace/wDraw/w-drawSpace.vue'
-//import wDrawControl from './workspace/wDraw/w-drawControl.vue'
-// wBom
-//import wBomData from './workspace/wBom/w-bomData.vue'
-// wTable
-//import wBomTable from './workspace/wTable/w-bomTable.vue'
-//import wMainBomTable from './workspace/wTable/w-mainBomTable.vue'
-
-// 注册全局组件
-
-// layout
-//Vue.component('NavMenu', NavMenu)
-//Vue.component('Popover', Popover)
-//Vue.component('User', User)
-//Vue.component('Search', Search) // nav
-//Vue.component('SideBar', SideBar)
-//Vue.component('WorkSpace', WorkSpace)
-//Vue.component('xFooter', xFooter)
-
-// workspace
-//Vue.component('xNavMenu', xNavMenu)
-//Vue.component('NavOne', NavOne)
-//Vue.component('NavTwo', NavTwo)
-//Vue.component('NavThree', NavThree) // wNavMenu
-//Vue.component('Bom', Bom)
-//Vue.component('wActiveAreaHeader',wActiveAreaHeader)
-//Vue.component('wActiveArea',wActiveArea)
-//Vue.component('wFrom', wFrom)
-//Vue.component('wTable',wTable)
-//Vue.component('wDraw', wDraw)
-
-
-
-// wDraw
-//Vue.component('wDrawSpace', wDrawSpace)
-//wBom
-//Vue.component('wBomData', wBomData)
-//wTable
-//Vue.component('wBomTable', wBomTable)
-//Vue.component('wMainBomTable', wMainBomTable)
-// components
-//Vue.component('wDrawControl', w-DrawControl)
-// 粒子效果
-//Vue.component('Nest', Nest)
-
-// vue-3d-model
-//Vue.component('ModelObj', ModelObj)
-// vue-grid-canvas
-//Vue.component('Grid', Grid)
-
-
-// 引入样式
-//import 'vue-easytable/libs/themes-base/index.css'
-// 导入 table 和 分页组件
-//import {VTable,VPagination} from 'vue-easytable'
-
-// 注册到全局
-//Vue.component(VTable.name, VTable)
-//Vue.component(VPagination.name, VPagination)
-
-
-
+// 指令
+import drag from './packages/directive/drag'
 
 // layout
 import NavMenu from './layout/nav/nav'
@@ -108,9 +21,13 @@ import xCard from './packages/card'
 import xTable from './packages/table'
 import multiMenu from './packages/multi-menu'
 // plugin
-import ContextMenu from './packages/contextmenu'
+//import ContextMenu from './packages/contextmenu' // ie 报错
+// 
+
 
 const components = [
+
+  //
   NavMenu,
   Popover,
   User,
@@ -130,32 +47,13 @@ components.map(component => {
 
 //Vue.prototype.$contextmenu = ContextMenu;
 
+Vue.directive('drag',drag)
 
-/* const install = function(Vue, opts = {}) {
-    components.map(component => {
-      Vue.component(component.name, component);
-    });
-    Vue.prototype.$message = Message;
-  }; */
-  
-  /* istanbul ignore if */
-/*   if (typeof window !== 'undefined' && window.Vue) {
-    install(window.Vue);
-  } */
-  
- /*  module.exports = {
-    NavMenu,
-    Popover,
-    User,
-    Search,
-    SideBar,
-    WorkSpace,
-    xFooter,
-    xNavMenu,
-    NavOne,
-    NavTwo,
-    NavThree,
-  };
-  
-  module.exports.default = module.exports; */
+Vue.directive('focus', {
+  // 当被绑定的元素插入到 DOM 中时……
+  inserted: function (el) {
+    // 聚焦元素
+    el.focus()
+  }
+})
   

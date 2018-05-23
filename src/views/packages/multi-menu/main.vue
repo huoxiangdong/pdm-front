@@ -2,7 +2,7 @@
    el-menu(
       v-bind="menuAttrs"
        :mode="menuAttrs.mode || type==='cell'?'vertical':'horizontal'" 
-       :style="type==='table'?'border:solid 1px #e6e6e6':''"
+       :style=`type==='table' && 'border:solid 1px #e6e6e6'`
        :default-active="activeIndex"  
        @select="selectHandler")
     el-menu-item(
@@ -10,14 +10,14 @@
         :index="index+1+''" 
         v-for="(value,index) in Data[type]"
         :key="value.id"
-        :style="type==='cell'?'height: 26px;line-height: 25px;font-size: 13px;':''"
-        :class="type==='work'?'work':''|| type==='table'?'table':''") 
+        :style=`type==='cell' && 'height: 26px;line-height: 25px;font-size: 13px;'`
+        :class=`type==='work' && 'work'|| type==='table' && 'table'`) 
         span(v-if="type!=='work' && type!=='table'" v-text="value") 
         i(v-else :class="value")       
 </template>
 
 <script>
-import { mapState,mapActions } from 'vuex';
+import { mapState,getters,mapActions, mapGetters } from 'vuex';
 import Data from './data'
 const BOOLEAN_KEYS = [
   'collapse',
@@ -44,6 +44,7 @@ export default {
   },
   computed: {
       ...mapState(['multiMenuIndex']),
+      ...mapGetters(['resetIndex']),
     menuAttrs () {
       // 处理 $attrs 里面 Boolean 类型的 prop 和统一 prop 命名 
       const { $attrs } = this
@@ -59,9 +60,9 @@ export default {
   methods: {
     ...mapActions(['getMultiMenuState']),
     selectHandler(index, keyPath) {
-      this.getMultiMenuState(this.type + index )
-      //console.log(this.multiMenuIndex)
-    
+      //console.log((this.$route.fullPath).match(/WorkSpace/g))
+      //console.log(/WorkSpace/g.test(this.$route.fullPath))
+      this.getMultiMenuState(this.type + index)  
     },
   }
 };

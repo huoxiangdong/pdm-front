@@ -5,10 +5,10 @@
       el-form(:model="formLogin" :rules="rules" ref="formLogin")
         // $refs 只在组件渲染完成后才填充，并且它是非响应式的。它仅仅作为一个直接访问子组件的应急方案——应当避免在模版或计算属性中使用 $refs 。
         el-form-item(label="账号" prop="name")
-          el-input(v-model="formLogin.name" placeholder="请输入用户名" prefix-icon="iconfont icon-dengluzhanghao" size="small")
+          el-input(v-model="formLogin.name" placeholder="请输入用户名" prefix-icon="iconfont icon-denglu-copy" size="small")
       
         el-form-item(label="密码" prop="password" )
-          el-input(type="password"  v-model="formLogin.password" placeholder="请输入密码" prefix-icon="iconfont icon-mima" size="small" @keyup.enter.native="login")
+          el-input(type="password"  v-model="formLogin.password" placeholder="请输入密码" prefix-icon="iconfont icon-mima1" size="small" @keyup.enter.native="login")
         // 站位
         el-form-item  
         el-form-item
@@ -140,6 +140,7 @@
 .register
    display: block
    margin: 0 auto
+
 
 </style>
 

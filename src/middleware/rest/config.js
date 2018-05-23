@@ -9,14 +9,15 @@ ajax.setTipFn((tips) => {
 // axios 提交
 export default {
   submit: {
-    register: ajax.create('/api/register'),
-    login: ajax.create('/api/login'),
-    token: ajax.query('/api/token'),
+    register: ajax.create('/api/Register'),
+    login: ajax.create('/api/Login'),
+    token: ajax.query('/api/Token'),
     // query 为 Get方法
-    addMaterialData: ajax.create('/api/material',{}), // config2
-    queryMaterialData: ajax.query('/api/material/query'),
-    updateMaterialData: ajax.create('/api/material/update'),
-    deleteMaterialData: ajax.query('/api/material/delete')
+    addMaterialData: ajax.create('/api/Material'), // config2
+    addPartiallyData: ajax.create('/api/Partially'), // config2
+    queryMaterialData: ajax.query('/api/Material/Query'),
+    updateMaterialData: ajax.create('/api/Material/Update'),
+    deleteMaterialData: ajax.query('/api/Material/Delete')
     
   },
 }

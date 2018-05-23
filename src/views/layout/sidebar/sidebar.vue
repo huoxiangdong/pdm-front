@@ -3,7 +3,7 @@
       default-active="1-4-1" 
   transition(name="el-zoom-in-center")    
    el-menu(
-     style="margin-top: 20px; margin-left:20px"
+     style="margin-top: 20px; margin-left:20px;"
      :default-active="$route.path" 
      router
      id="sidebar"

@@ -3,12 +3,12 @@ export default {
   material_columns: [
     // { label: 'APEX-XXX01', prop: '',width: 140,resizable:false },
      { label: '方位', prop: 'position',width: 60,resizable:false },
-     { label: '物料', prop: 'design',width: 120,resizable:false },
-     { label: '描述', prop: 'description',width: 260,resizable:false },
+     { label: '物料', prop: 'MatName',width: 120,resizable:false },
+     { label: '描述', prop: 'MatDesc',width: 260,resizable:false },
      { label: '直径', prop: 'diameter',width: 80,resizable:false },
      { label: '数量', prop: 'quantity',width: 80,resizable:false },
      { label: '组数', prop: 'diameter',width: 80,resizable:false },
-     { label: '损耗率', prop: 'quantity',width: 80,resizable:false }, 
+     { label: '损耗率', prop: 'LossRate',width: 80,resizable:false }, 
      
    ],
    main_row: [ // row
@@ -25,5 +25,4 @@ export default {
       runtime:0.033
     }
   ],
-
 }

@@ -8,7 +8,8 @@ export default {
           key:'MatNumber',
           title:'物料编号',
           value:'',
-          isInput:true
+          isInput:true,
+          //width: '50%'
       },
       {
           key:'MatName',
@@ -74,7 +75,7 @@ export default {
       {
           key:'BatControl',
           title:'批号控制', //optionbox
-          value:'',
+          value:false,
           isInput:true
       },
       {
@@ -144,37 +145,37 @@ export default {
       {
           key:'PurAllow',
           title:'允许采购',//optionbox
-          value:'',
+          value:false,
           isInput:true
       },
       {
           key:'OutAllow',
           title:'允许外协',//optionbox
-          value:'',
+          value:false,
           isInput:true
       },
       {
           key:'ProAllow',
           title:'允许生产',//optionbox
-          value:'',
+          value:false,
           isInput:true
       },
       {
           key:'ProHaiMatAllow',
           title:'允许生产发料',//optionbox
-          value:'',
+          value:false,
           isInput:true
       },
       {
           key:'WorCenPicAllow',
           title:'允许工作中心领料(计入杂费)',//optionbox
-          value:'',
+          value:false,
           isInput:true
       },
       {
           key:'SalAllow',
           title:'允许销售',//optionbox
-          value:'',
+          value:false,
           isInput:true
       }
     ],
@@ -328,9 +329,9 @@ export default {
     ]
   },
   initData: {
-    //CreateDate: moment().format('YYYY-MM-DD HH:mm:ss'), 
+    CreateDate: moment().format('YYYY-MM-DD HH:mm:ss'), 
     Creator: username,
-    //LastUpdate: moment().format('YYYY-MM-DD HH:mm:ss')
+    LastUpdate: moment().format('YYYY-MM-DD HH:mm:ss')
   },
 }
 /* 

@@ -6,18 +6,14 @@
  
   el-container
     el-header
-      NavMenu(菜单)
+      NavMenu()
     // 中
     el-container
-      el-aside(style="width:auto;transition: width 0s;")
+      el-aside(style="width:auto;")
         side-bar
-        //side-bar(v-on:setActiveItem="setActiveItem")
-      el-main
-        multi-menu(type="work" )
-        //el-tag(type="success" size="small" closable) 中等标签
+      el-main(style="")
+        multi-menu(v-if="/WorkSpace/g.test($route.fullPath)" type="work")
         router-view
-        
-        //WorkSpace(ref="carousel")
     // 底
     //el-footer
       AppFooter

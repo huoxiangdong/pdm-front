@@ -1,29 +1,27 @@
 <template lang="pug">
-div(class="container")
- div(class="draw-container")  
-     el-button(v-drag="") test
- div(class="worker" ) 
-   el-collapse(v-model="activeName" v-for="item in items" :key="item.name")
-    el-collapse-item(class="collapse-item" :name="item.name" )
-      template(slot="title") 
-        div(class="title" v-text="item.title") 
-      el-tag(class="tag" 
-             type="warning" 
-             size="small" 
-             v-for="val in item.components" :key="val" v-text="val"
-             draggable="true" 
-             @dragstart.native="dragstart"
-             @drag.native="ondrag"
-            ) 
- //draggable(element="el-collapse" :list="list" :component-data="getComponentData()")
-    el-collapse-item(v-for="e in list" :title="e.title" :name="e.name" :key="e.name")
-        div {{e.description}}
+div(class="main")
+  div(class="draw-container")  
+      div( class = "test" v-drag="") test
+  div(class="options" ) 
+    el-collapse(v-model="activeName" v-for="item in items" :key="item.name")
+      el-collapse-item(class="collapse-item" :name="item.name" )
+        template(slot="title") 
+            div(class="title" v-text="item.title") 
+        el-tag(class="tag" 
+                type="warning" 
+                size="small" 
+                v-for="val in item.components" :key="val" v-text="val"
+                draggable="true" 
+                @dragstart.native="dragstart"
+                @drag.native="ondrag"
+                ) 
 </template>
 
 <script>
-//import draggable from 'vuedraggable'
+
 import { mapState } from 'vuex'
 export default {
+  name:'Evolution',
   data(){
       return {
         activeName: '0',
@@ -68,24 +66,26 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-.container
+.main
   display grid 
   grid-template-columns 3fr 1fr
   grid-gap 1rem
-  height 100%
-  margin 5px
+  height 30rem
+
 .draw-container
   height 100%
   border 1px dashed #ff5000
-.worker
-  border-left 1px solid #eee
-  border-right  1px solid #eee
-.title
-  //padding 0 8px
+
 .collapse-item
   margin-bottom -2px
-  padding 0 8px
-.tag
-  margin 1px 1px
 
+.title
+  padding 0 8px 
+
+.tag
+  margin 3px 3px
+.test 
+  width 50px
+  height 50px
+  background-color #ff5000
 </style>

@@ -6,7 +6,7 @@
 
     i(class="iconfont icon-xiaoxitongzhi" ) 
     // 标记
-    el-badge(:value="1" class="item")
+    //el-badge(:value="1" class="item")
     // 弹出框
     el-popover(
     ref="popover2"
@@ -33,6 +33,13 @@ export default {
 
 <style lang="stylus" scoped>
  #popover
-   padding-top: 22px
+   padding-top: 24px
    border-right: solid 0px #e6e6e6; 
+.el-menu >>>
+ .el-badge__content 
+    font-size: 5px;
+    height: 13px;
+    line-height: 13px;
+    padding: 0 3px;
+
 </style>

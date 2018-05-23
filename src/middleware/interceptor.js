@@ -33,6 +33,7 @@ axios.interceptors.request.use(
 // http response 拦截器（所有接收到的请求都要从这儿过一次）
  axios.interceptors.response.use(
    response => {
+ 
   if(response.config.url.match(/^\/api\/(register|login|token).*/g)) { //response.config.url.match(/^\/api\/(register|login|token).*/g)
     
     if (!response.data.token) { // 后端的checkLogin返回的json数据作为跳转依据

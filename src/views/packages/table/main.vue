@@ -4,12 +4,13 @@ div(id="table" style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);")
   egrid(border
         highlight-current-row
         max-height="470"
-         ref="egrid"
+         
          :column-type="type"
          :data="tableData"
          :columns="columns"
          :columns-props="columnsProps"
          @cell-dblclick="cell_dblclick"
+         @cell-click="cell_click"
          @row-contextmenu="row_contextmenu"
          @row-click="row_click"  
          style="border-radius: 0px;"
@@ -29,6 +30,12 @@ export default {
   //mixins: [cardStyle],
   props: {
     tableData: {
+      type: Array,
+      default: function() {
+        return []
+      }
+    },
+    columns: {
       type: Array,
       default: function() {
         return []
@@ -88,7 +95,7 @@ export default {
                 }) */
       },
       //data: Data.data,
-      columns: Data.columns,
+      //columns: Data.columns,
       headerData: Data.header
     };
   },
@@ -105,13 +112,13 @@ export default {
       //console.dir(this.data.indexOf(row))
       //console.log(this.data)
     },
+    cell_click(row, column, cell, event) {
+       //event.target.readOnly = !event.target.readOnly;
+    },
     cell_dblclick(row, column, cell, event) {
-      console.log(this);
-      // cell双击
-      //this.isReadOnly()
-      //event.target.hidden = true
-      event.target.readOnly = !event.target.readOnly;
-      console.log(event);
+      //console.log(event.target.readOnly);
+      //event.target.readOnly = !event.target.readOnly;
+      
     },
     // cell_click(row, column, cell, event) {
     //   this.cellText = cell.childNodes[0].childNodes[0].childNodes[1];
@@ -143,7 +150,9 @@ export default {
     // }
   },
   watch: {
-    multiMenuIndex(val, oldVal) {
+    'multiMenuIndex.value': {
+      deep: true,
+      handler: function(val,oldVal) {
       switch (val) {
         case 'table1': // 复制
             localStorage.setItem(
@@ -194,23 +203,20 @@ export default {
           break;
       }
     }
+
+    }
   }
 };
 </script>
 
 <style lang="stylus" scoped>
-#table >>> {
-  .el-table--group, .el-table--border {
-    border: 0px solid #ebeef5;
-  }
+#table >>> 
+  .el-table--group, .el-table--border 
+    border 0px solid #ebeef5
+  .el-table--border 
+    border-left 1px solid #fff
+    border-bottom: 0px solid #000
+  .el-table--enable-row-hover .el-table__body tr:hover > td 
+    background-color #c8e1ff
 
-  .el-table--border {
-    border-left: 1px solid #fff;
-    border-bottom: 0px solid #000;
-  }
-
-  .el-table--enable-row-hover .el-table__body tr:hover > td {
-    background-color: #c8e1ff;
-  }
-}
 </style>
