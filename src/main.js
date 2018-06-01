@@ -28,6 +28,7 @@ Vue.prototype.$http = axios
 // api 
 import rest from './middleware/rest'
 
+
 Vue.config.productionTip = false
 
 Vue.use(Element)
@@ -41,5 +42,6 @@ let app = new Vue({
   //components: { App },
   //template: '<App/>'
 })
+
 
 

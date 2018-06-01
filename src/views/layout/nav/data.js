@@ -30,6 +30,10 @@ export default {
     {
       title: '演化',
       index: '/Evolution'
+    },
+    {
+      title: '布局',
+      index: '/layout'
     }
   ]
 }

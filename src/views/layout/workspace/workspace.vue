@@ -1,30 +1,42 @@
-<template lang="pug">   
+<template lang="pug">  
   el-carousel(
-    height='720px!important'
+    height='720px!important' 
     indicator-position="outside" 
     arrow="never" 
     :autoplay="false"
     ref='carousel'
     )
-    el-carousel-item
-       router-view(style="padding:0 30px")
-    el-carousel-item   
+    el-carousel-item(@click.native = "onclick")
+      router-view
+    el-carousel-item 
+      
 </template>
 
 <script>
+
 import { mapActions } from 'vuex'
+
+         
 export default {
+  //components: { test },
   name: "WorkSpace",
   data() {
     return {}
   },
 methods: {
     ...mapActions(['getCarScroll']),
-
+     onclick(e) {
+       
+     // console.log(this)
+    //    this.$message({
+    //      message: '只是一条消息',
+    //      duration: 0
+    //    })
+    //  }
     // carScroll(event){
     //  this.getCarScroll(event.target.scrollTop)
 
-    // }
+    }
  }, 
 
 }

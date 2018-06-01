@@ -1,13 +1,11 @@
 <template lang="pug">
-  // 布局:
+// 布局:
                                           -----  el-header
                                           -- --  el-aside  el-main
                                           -----  el-footer
- 
-  el-container
+el-container
     el-header
       NavMenu()
-    // 中
     el-container
       el-aside(style="width:auto;")
         side-bar
@@ -27,7 +25,8 @@ export default {
       formInline: {
         user: "",
         region: ""
-      }
+      },
+     
       //user: { name: "" }
     };
   },

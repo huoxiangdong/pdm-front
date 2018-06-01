@@ -1,7 +1,7 @@
 /**** 全局组件注册 ***/
 import Vue from 'vue'
 // 指令
-import drag from './packages/directive/drag'
+//import drag from './packages/directive/drag'
 
 // layout
 import NavMenu from './layout/nav/nav'
@@ -16,17 +16,20 @@ import xFooter from './layout/footer'
 //import NavOne from './layout/workspace/nav/nav-one.vue'
 //import NavTwo from './layout/workspace/nav/nav-two.vue'
 //import NavThree from './layout/workspace/nav/nav-three.vue' // wNavMenu
+
+
 // packages
 import xCard from './packages/card'
 import xTable from './packages/table'
 import multiMenu from './packages/multi-menu'
+import DCard from './packages/dcard'
+
 // plugin
 //import ContextMenu from './packages/contextmenu' // ie 报错
 // 
 
-
 const components = [
-
+  DCard,
   //
   NavMenu,
   Popover,
@@ -47,13 +50,24 @@ components.map(component => {
 
 //Vue.prototype.$contextmenu = ContextMenu;
 
-Vue.directive('drag',drag)
+//Vue.directive('drag',drag)
 
-Vue.directive('focus', {
-  // 当被绑定的元素插入到 DOM 中时……
-  inserted: function (el) {
-    // 聚焦元素
-    el.focus()
-  }
-})
-  
+
+// utils
+import Drag from '@/utils/drag'
+Vue.use(Drag)
+// import Guide from './utils/ref-line'
+
+// Vue.use(Guide)
+import Guide from '@/utils/guide'
+Vue.use(Guide)
+import News from '@/utils/news'
+Vue.use(News)
+import Grid from '@/views/packages/directive/grid'
+Vue.use(Grid)
+import Ripple from '@/views/packages/directive/ripple'
+Vue.use(Ripple)
+
+
+//Vue.prototype.pug = require('../assets/js/pug').default
+

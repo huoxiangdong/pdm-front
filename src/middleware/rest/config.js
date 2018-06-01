@@ -1,6 +1,6 @@
 import { Message } from 'element-ui' // 单独引入 Message(options)
 import ajax from './ajax'
-console.log(ajax)
+
 // 使用 el message方法弹出错误
 ajax.setTipFn((tips) => {
   Message.error(tips)

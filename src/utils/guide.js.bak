@@ -1,0 +1,192 @@
+let lines = {
+    // 横
+    xt: null, // 上 top
+    xc: null, // 中 
+    xb: null, // 下 bottom
+    // 竖
+    yl: null, // 左 left
+    yc: null, // 中
+    yr: null, // 右 right
+}
+
+
+
+// 置入参考线
+for (let p in lines) {
+
+    let node = lines[p] = document.createElement('div') // 创建div元素
+
+    node.classList.add('ref-line', p) // 为div添加'.ref-line'
+
+    node.style.cssText = `display:none;
+                          opacity:0.7;
+                          position:absolute;
+                          background:#424242;
+                          z-index:199111250; 
+                          ${p[0] === 'x' ? 'width:100%;height:1px;left:0;' : 'width:1px;height:100%;top:0;'}`
+
+    // 挂上一些辅助方法
+    node.show   = function () { // 显示
+        this.style.display = 'block' // 块
+    }
+    node.hide   = function () {
+        this.style.display = 'none' // 隐藏
+    }
+    node.isShow = function () { // true 在显示
+        return this.style.display !== 'none'
+    }
+  
+    document.body.appendChild(node) // 插入body
+}
+
+class Guide {
+    constructor(options = {}) { // 构造器
+       
+        this.options = Object.assign({
+            gap: 3 // 间距
+        }, options)
+      
+    }
+
+    /**
+     * @param dragNode {Element} 拖拽元素的原生node
+     * @param checkNodes {String|Element} 选择器 或者 原生node集合
+     */
+    check(dragNode, Nodes,dragRect) { // 所有元素 & 元素选择器 
+       // checkNodes   = typeof checkNodes === 'string' ? document.querySelectorAll(checkNodes) : checkNodes  // 元素集合
+
+        //let dragRect = dragNode.getBoundingClientRect() // 元素位置 & 大小 相对于视口
+       
+        this.uncheck() // 移除参考线
+
+        Array.from(checkNodes).forEach((item) => {
+            item.classList.remove('ref-line-active') // 移除活动的参考线
+            
+            if (item === dragNode) return //dragNode 排除被点击的元素
+            
+            let {top, height, bottom, left, width, right} = item.getBoundingClientRect() // 每一个元素位置&大小 不含被点击元素
+            // 中间
+            let dragWidthHalf                             = dragRect.width / 2
+            let itemWidthHalf                             = width / 2
+
+            let dragHeightHalf                            = dragRect.height / 2
+            let itemHeightHalf                            = height / 2
+
+            let conditions = { // 条件判断 (被点击元素 & 所有元素)
+                top: [
+                    // xt-top
+                    {
+                        isNearly : this._isNearly(dragRect.top, top), // 是否在其附近
+                        lineNode : lines.xt, // 参考线
+                        lineValue: top,
+                        dragValue: top
+                    },
+                    // xt-bottom
+                    {
+                        isNearly : this._isNearly(dragRect.bottom, top),
+                        lineNode : lines.xt,
+                        lineValue: top,
+                        dragValue: top - dragRect.height
+                    },
+                    // xc
+                    {
+                        isNearly : this._isNearly(dragRect.top + dragHeightHalf, top + itemHeightHalf),
+                        lineNode : lines.xc,
+                        lineValue: top + itemHeightHalf,
+                        dragValue: top + itemHeightHalf - dragHeightHalf
+                    },
+                    // xb-top
+                    {
+                        isNearly : this._isNearly(dragRect.bottom, bottom),
+                        lineNode : lines.xb,
+                        lineValue: bottom,
+                        dragValue: bottom - dragRect.height
+                    },
+                    // xb-bottom
+                    {
+                        isNearly : this._isNearly(dragRect.top, bottom),
+                        lineNode : lines.xb,
+                        lineValue: bottom,
+                        dragValue: bottom
+                    },
+                ],
+
+                left: [
+                    // yl-left
+                    {
+                        isNearly : this._isNearly(dragRect.left, left),
+                        lineNode : lines.yl,
+                        lineValue: left,
+                        dragValue: left
+                    },
+                    // yl-right
+                    {
+                        isNearly : this._isNearly(dragRect.right, left),
+                        lineNode : lines.yl,
+                        lineValue: left,
+                        dragValue: left - dragRect.width
+                    },
+                    // yc
+                    {
+                        isNearly : this._isNearly(dragRect.left + dragWidthHalf, left + itemWidthHalf),
+                        lineNode : lines.yc,
+                        lineValue: left + itemWidthHalf,
+                        dragValue: left + itemWidthHalf - dragWidthHalf
+                    },
+                    // yr-left
+                    {
+                        isNearly : this._isNearly(dragRect.right, right),
+                        lineNode : lines.yr,
+                        lineValue: right,
+                        dragValue: right - dragRect.width
+                    },
+                    // yr-right
+                    {
+                        isNearly : this._isNearly(dragRect.left, right),
+                        lineNode : lines.yr,
+                        lineValue: right,
+                        dragValue: right
+                    },
+                ]
+            }
+
+            for (let key in conditions) { // 执行判断
+                // 遍历符合的条件并处理
+                conditions[key].forEach((condition) => {
+                    if (!condition.isNearly) return
+
+                    item.classList.add('ref-line-active') // 为参考线添加 ref-line-active类
+                    dragNode.style[key]           = `${condition.dragValue}px`
+                    condition.lineNode.style[key] = `${condition.lineValue}px` // 参考线样式
+                    condition.lineNode.show() // 显示参考线
+                })
+            }
+        })
+    }
+
+    uncheck() {
+        Object.values(lines).forEach((item) => item.hide()) // 隐藏参考线
+        Array.from(document.querySelectorAll('.ref-line-active')).forEach((item) => item.classList.remove('ref-line-active')) // 移除活动的参考线
+    }
+
+    _isNearly(dragValue, targetValue) { // 被点击元素 & 所有元素   
+        return Math.abs(dragValue - targetValue) <= this.options.gap // 点击的元素-其他元素小于3,则在其附近
+    }
+}
+
+
+// 兼容
+(function (root, factory) {// root == window; factory == return Class
+    
+    if (typeof define === 'function' && define.amd) { // 若有 define
+        // AMD
+        define([], factory) // 执行
+    } else if (typeof exports === 'object') { // 若有 exports
+        // Node, CommonJS
+        module.exports = factory
+    } else {
+        // Window
+        root.RefLine = factory // root == window 挂载到window
+        
+    }
+}(window,RefLine))

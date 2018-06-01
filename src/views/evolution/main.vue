@@ -9,11 +9,13 @@ div(class="main"
       ref="draw"
       @click="onclick"
       v-drag:move="")  
-    el-button
-    el-card
-    el-card(v-for="a in buttonGroup" :key='a.id')
-    el-button(v-for="a in buttonGroup" :key='a') test
-   
+     
+     el-card
+      el-button
+     el-card(v-for="a in buttonGroup" :key='a.id')
+     el-button(v-for="a in buttonGroup" :key='a') test
+
+  
   div(class="options" ) 
     el-collapse(v-model="activeName" v-for="item in items" :key="item.name")
       el-collapse-item(class="collapse-item" :name="item.name" )
@@ -31,9 +33,10 @@ div(class="main"
 <script>
 
 import { mapState } from 'vuex'
+import Vue from 'vue'
+import { Button } from 'element-ui'
 export default {
   name:'Evolution',
- 
   data(){
       return {
         activeName: '0',
@@ -67,9 +70,9 @@ export default {
     ...mapState(['multiMenuIndex'])
   },
   methods: {
-    onclick(e) {
-      
-    // console.log(e)
+     onclick(e) {
+     console.log(this)
+     
     },
     ondragstart(e) {
       e.dataTransfer.setData("text", e.target.innerHTML) // 携带数据
@@ -97,11 +100,16 @@ export default {
 
   
   },
- mounted() {
+ async mounted() {
    //this.$forceUpdate()
-   console.log(this)
- }
+  this.buttonGroup.push(1)
+  
+  
+ },
+ updated() {
+   console.log('更新了')
 
+ }
 }
 </script>
 <style lang="stylus" scoped>

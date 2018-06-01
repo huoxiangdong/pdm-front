@@ -1,7 +1,7 @@
 <template lang="pug">
 // :style="{transform: `translateY(${ carScroll}px) scale(1)`,'z-index':999}"
 div(style="overflow-y:auto;height:720px;")
-  //div(style="position: fixed;z-index: 999;margin: 18px 0px 0px 350px;")
+  div(style="position: fixed;z-index: 999;margin: 18px 0px 0px 350px;")
    el-tag(v-for="title in Object.keys(materialData)" :key="title.id" size="mini" type="info" color="rgb(102, 102, 102,0.8)" style="margin:2px;border-radius:0px;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border: 0px;") 
      a(:href="'#'+title" ) {{ title }}
   x-card(

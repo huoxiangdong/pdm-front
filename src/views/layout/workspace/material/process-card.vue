@@ -1,23 +1,5 @@
 <template lang="pug">
-div(class="container")
- div(class="draw-container")  
-     el-button(v-drag="") test
- div(class="worker" ) 
-   el-collapse(v-model="activeName" v-for="item in items" :key="item.name")
-    el-collapse-item(class="collapse-item" :name="item.name" )
-      template(slot="title") 
-        div(class="title" v-text="item.title") 
-      el-tag(class="tag" 
-             type="warning" 
-             size="small" 
-             v-for="val in item.components" :key="val" v-text="val"
-             draggable="true" 
-             @dragstart.native="dragstart"
-             @drag.native="ondrag"
-            ) 
- //draggable(element="el-collapse" :list="list" :component-data="getComponentData()")
-    el-collapse-item(v-for="e in list" :title="e.title" :name="e.name" :key="e.name")
-        div {{e.description}}
+  el-card(:shadow="'hover'")
 </template>
 
 <script>
@@ -26,29 +8,8 @@ import { mapState } from 'vuex'
 export default {
   data(){
       return {
-        activeName: '0',
-        items:[{
-          title:'属性编辑区',
-          name:'1',
-          
-        },{
-          title:'From',
-          name:'2',
-          components:['单选框','多选框','输入框','计数器','选择器','级联选择器','开关','滑块','时间选择器','日期选择器','日期事件选择器','上传','评分','颜色选择器','穿梭框','表单']
-        },{
-          title:'Data',
-          name:'4',
-          components:['单选框','多选框','输入框','计数器','选择器','级联选择器','开关','滑块','时间选择器','日期选择器','日期事件选择器','上传','评分','颜色选择器','穿梭框','表单']
-        },{
-          title:'Notice',
-          name:'5'
-        },{
-          title:'Navigation',
-          name:'6'
-        },{
-          title:'Others',
-          name:'7'
-        }],
+        activeName: '0'
+       
       }
   },
   computed: {

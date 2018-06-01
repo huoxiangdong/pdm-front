@@ -40,6 +40,8 @@ requireAuth: true, // 添加该字段表示该路由需要登录,路由验证
   },{
     path:'/Report', component: () => import('@/views/layout/report/main')
   },{
+    path:'/layout', component: () => import('@/views/packages/layout/index.vue')
+  },{
     path: '/WorkSpace',
     component: () => import ('@/views/layout/workspace/workspace'),
     children: [{
